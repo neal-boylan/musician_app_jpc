@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">musician_jpc</string>
+    <string name="musicianTitle">Welcome Homer</string>
+    <string name="musicianSubtitle">Add your clip here</string>
+    <string name="addClipButton">Donate</string>
+    <string name="video">Video</string>
+    <string name="audio">Audio</string>
+    <string name="amount">Amount</string>
+    <string name="totalClips">Total Clips: </string>
+    <string name="totalSoFar">€%d</string>
+    <string name="limitExceeded">"A Donation of €%d will exceed Maximum Donations of €10000"</string>
+    <string name="clipsTitle">Clip List</string>
+    <string name="defaultAmount">00</string>
+    <string name="defaultMethod">N/A</string>
+    <string name="defaultMessage">Go Homer!</string>
+    <string name="enter_message">Enter Message</string>
+    <string name="show_less">Show Less</string>
+    <string name="show_more">Show More</string>
 </resources>
