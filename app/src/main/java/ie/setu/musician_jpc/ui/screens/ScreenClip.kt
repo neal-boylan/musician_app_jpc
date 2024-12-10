@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -20,6 +21,9 @@ import androidx.compose.ui.unit.dp
 import ie.setu.musician_jpc.data.ClipModel
 import ie.setu.musician_jpc.data.fakeClips
 import ie.setu.musician_jpc.ui.components.addClip.AddClipButton
+import ie.setu.musician_jpc.ui.components.addClip.Genre
+import ie.setu.musician_jpc.ui.components.addClip.GenreChips
+import ie.setu.musician_jpc.ui.components.addClip.GenreChipsString
 import ie.setu.musician_jpc.ui.components.addClip.InstrumentPicker
 import ie.setu.musician_jpc.ui.components.addClip.MessageInput
 import ie.setu.musician_jpc.ui.components.addClip.ProgressBar
@@ -35,6 +39,8 @@ fun ScreenClip(modifier: Modifier = Modifier,
 
     var mediaType by remember { mutableStateOf("Video") }
     var instrument by remember { mutableStateOf("Guitar") }
+    // var genres: MutableState<List<Genre?>> = remember { mutableStateOf(listOf()) }
+    var genres: MutableState<List<String?>> = remember { mutableStateOf(listOf()) }
     var clipMessage by remember { mutableStateOf("Go Homer!") }
     var totalClips by remember { mutableIntStateOf(0) }
 
@@ -62,6 +68,9 @@ fun ScreenClip(modifier: Modifier = Modifier,
                     onInstrumentChange = { instrument = it }
                 )
             }
+
+            GenreChipsString(onGenreSelected = { genres = it })
+
             ProgressBar(
                 modifier = modifier,
                 totalClips = totalClips)
@@ -73,7 +82,7 @@ fun ScreenClip(modifier: Modifier = Modifier,
                 modifier = modifier,
                 clip = ClipModel(mediaType = mediaType,
                     instrument = instrument,
-                    message = clipMessage),
+                    message = genres.value.toString()),
                 clips = clips,
                 onTotalClipsChange = { totalClips = it }
             )
