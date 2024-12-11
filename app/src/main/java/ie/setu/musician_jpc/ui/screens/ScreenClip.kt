@@ -22,16 +22,14 @@ import androidx.compose.ui.unit.dp
 import ie.setu.musician_jpc.data.ClipModel
 import ie.setu.musician_jpc.data.fakeClips
 import ie.setu.musician_jpc.ui.components.addClip.AddClipButton
-import ie.setu.musician_jpc.ui.components.addClip.Genre
-import ie.setu.musician_jpc.ui.components.addClip.GenreChips
-import ie.setu.musician_jpc.ui.components.addClip.GenreChipsString
+import ie.setu.musician_jpc.ui.components.addClip.ChipGroupString
+// import ie.setu.musician_jpc.ui.components.addClip.GenreChipsString
 import ie.setu.musician_jpc.ui.components.addClip.InstrumentPicker
 import ie.setu.musician_jpc.ui.components.addClip.MessageInput
 import ie.setu.musician_jpc.ui.components.addClip.ProgressBar
 import ie.setu.musician_jpc.ui.components.addClip.RadioButtonGroup
 import ie.setu.musician_jpc.ui.components.addClip.WelcomeText
 import ie.setu.musician_jpc.ui.theme.Musician_jpcTheme
-import timber.log.Timber
 
 @Composable
 fun ScreenClip(modifier: Modifier = Modifier,
@@ -44,6 +42,7 @@ fun ScreenClip(modifier: Modifier = Modifier,
     var clipMessage by remember { mutableStateOf("Go Homer!") }
     var totalClips by remember { mutableIntStateOf(0) }
     var msg: String = ""
+    val selectedGenre: MutableState<List<String?>> = remember {mutableStateOf(listOf())}
     Column {
         Column(
             modifier = modifier.padding(
@@ -69,8 +68,21 @@ fun ScreenClip(modifier: Modifier = Modifier,
                 )
             }
 
-            GenreChipsString(onGenreSelected = { genres = it })
-            genres.forEach{ Timber.i("genre : $it")}
+            ChipGroupString(genres = genres,
+                selectedGenres = selectedGenre.value,
+                onSelectedChanged = {
+                    val oldList: MutableList<String?> = selectedGenre.value.toMutableList()
+                    val genreFromString = it
+
+                    if(oldList.contains(genreFromString)){
+                        oldList.remove(genreFromString)
+                    }else{
+                        oldList.add(genreFromString)
+                    }
+
+                    selectedGenre.value = oldList
+                })
+
 
             ProgressBar(
                 modifier = modifier,
@@ -81,8 +93,10 @@ fun ScreenClip(modifier: Modifier = Modifier,
             )
             AddClipButton (
                 modifier = modifier,
-                clip = ClipModel(mediaType = mediaType,
+                clip = ClipModel(
+                    mediaType = mediaType,
                     instrument = instrument,
+                    genres = selectedGenre.value,
                     message = msg),
                 clips = clips,
                 onTotalClipsChange = { totalClips = it }

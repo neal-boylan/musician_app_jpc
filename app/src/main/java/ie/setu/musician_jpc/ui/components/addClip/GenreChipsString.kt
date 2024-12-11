@@ -25,44 +25,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import timber.log.Timber
 
-@Composable
-fun GenreChipsString(onGenreSelected: (SnapshotStateList<String>) -> Unit) {
-
-    var selectedGenre = remember { mutableStateListOf<String>() }
-
-    ChipGroupString(
-        genres = listOf("Rock", "Pop", "Jazz", "Blues", "Rap", "Metal"),
-        selectedGenres = selectedGenre,
-        onSelectedChanged = {
-            val oldList: SnapshotStateList<String> = selectedGenre
-            val genreFromString = it
-
-            if(oldList.contains(genreFromString)){
-                oldList.remove(genreFromString)
-            }else{
-                oldList.add(genreFromString)
-            }
-            oldList.forEach { Timber.i("oldList : $it") }
-            selectedGenre = oldList
-
-            Timber.i("oldList : $selectedGenre")
-
-            onGenreSelected(selectedGenre)
-        }
-    )
-
-}
-
 // @Preview(showBackground = true)
 @Composable
 fun ChipGroupString(
     genres: List<String> = listOf("Rock", "Pop", "Jazz", "Blues", "Rap", "Metal"),
-    selectedGenres: List<String?> = mutableListOf(),
+    selectedGenres: List<String?> = listOf(),
     onSelectedChanged: (String) -> Unit = {},
 ) {
+
+    val possibleGenres= listOf("Rock", "Pop", "Jazz", "Blues", "Rap", "Metal")
+
     Column(modifier = Modifier.padding(8.dp)) {
         LazyRow {
-            items(genres) {
+            items(possibleGenres) {
                 ChipString(
                     name = it,
                     isSelected = selectedGenres.contains(it),
