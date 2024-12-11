@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -39,11 +40,10 @@ fun ScreenClip(modifier: Modifier = Modifier,
 
     var mediaType by remember { mutableStateOf("Video") }
     var instrument by remember { mutableStateOf("Guitar") }
-    // var genres: MutableState<List<Genre?>> = remember { mutableStateOf(listOf()) }
-    var genres: MutableState<List<String?>> = remember { mutableStateOf(listOf()) }
+    var genres = remember { mutableStateListOf("Rock", "Pop") }
     var clipMessage by remember { mutableStateOf("Go Homer!") }
     var totalClips by remember { mutableIntStateOf(0) }
-
+    var msg: String = ""
     Column {
         Column(
             modifier = modifier.padding(
@@ -70,6 +70,7 @@ fun ScreenClip(modifier: Modifier = Modifier,
             }
 
             GenreChipsString(onGenreSelected = { genres = it })
+            genres.forEach{ Timber.i("genre : $it")}
 
             ProgressBar(
                 modifier = modifier,
@@ -82,7 +83,7 @@ fun ScreenClip(modifier: Modifier = Modifier,
                 modifier = modifier,
                 clip = ClipModel(mediaType = mediaType,
                     instrument = instrument,
-                    message = genres.value.toString()),
+                    message = msg),
                 clips = clips,
                 onTotalClipsChange = { totalClips = it }
             )
