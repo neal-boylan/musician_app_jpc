@@ -29,6 +29,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ie.setu.musician_jpc.R
+import ie.setu.musician_jpc.ui.components.addClip.ChipGroupString
 import ie.setu.musician_jpc.ui.theme.Musician_jpcTheme
 import java.text.DateFormat
 import java.util.Date
@@ -37,6 +38,7 @@ import java.util.Date
 fun ClipCard(
     mediaType: String,
     instrument: String,
+    genres: List<String>,
     message: String,
     dateAdded: String
 ) {
@@ -46,8 +48,10 @@ fun ClipCard(
         ),
         modifier = Modifier.padding(vertical = 4.dp, horizontal = 2.dp)
     ) {
-        ClipCardContent(mediaType,
+        ClipCardContent(
+            mediaType,
             instrument,
+            genres,
             message,
             dateAdded)
     }
@@ -57,6 +61,7 @@ fun ClipCard(
 private fun ClipCardContent(
     mediaType: String,
     instrument: String,
+    genres: List<String>,
     message: String,
     dateAdded: String
 ) {
@@ -100,6 +105,8 @@ private fun ClipCardContent(
             Text(
                 text = "Clip added on $dateAdded", style = MaterialTheme.typography.labelSmall
             )
+
+            ChipGroupString(genres = genres)
             if (expanded) {
                 Text(modifier = Modifier.padding(vertical = 16.dp), text = message)
             }
@@ -124,6 +131,7 @@ fun DonationCardPreview() {
         ClipCard(
             mediaType = "Direct",
             instrument = "Guitar",
+            genres = listOf("Rock", "Pop"),
             message = "A description of my issue...",
             dateAdded = DateFormat.getDateTimeInstance().format(Date())
         )

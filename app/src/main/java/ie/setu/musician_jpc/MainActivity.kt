@@ -31,8 +31,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import ie.setu.musician_jpc.data.ClipModel
+import ie.setu.musician_jpc.navigation.ClipList
+import ie.setu.musician_jpc.navigation.NavHostProvider
+import ie.setu.musician_jpc.navigation.allDestinations
+import ie.setu.musician_jpc.ui.components.general.BottomAppBarProvider
 import ie.setu.musician_jpc.ui.components.general.MenuItem
+import ie.setu.musician_jpc.ui.components.general.TopAppBarProvider
 import ie.setu.musician_jpc.ui.screens.ScreenClip
 import ie.setu.musician_jpc.ui.screens.ScreenClipList
 import ie.setu.musician_jpc.ui.theme.Musician_jpcTheme
@@ -55,59 +63,33 @@ class MainActivity : ComponentActivity() {
 }
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MusicianApp(modifier: Modifier = Modifier) {
+fun MusicianApp(modifier: Modifier = Modifier,
+                navController: NavHostController = rememberNavController()) {
+
     val clips = remember { mutableStateListOf<ClipModel>() }
-    var selectedMenuItem by remember { mutableStateOf<MenuItem?>(MenuItem.AddClip) }
+    val currentNavBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = currentNavBackStackEntry?.destination
+    val currentBottomScreen = allDestinations.find { it.route == currentDestination?.route } ?: ClipList
 
     Scaffold(
         modifier = modifier,
         topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = stringResource(id = R.string.app_name),
-                        color = Color.White
-                    )
-                },
-                colors = TopAppBarDefaults.largeTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primary
-                ),
-                actions = {
-                    if(selectedMenuItem == MenuItem.AddClip) {
-                        IconButton(onClick = {
-                            selectedMenuItem = MenuItem.ClipList
-                        }) {
-                            Icon(
-                                imageVector = Icons.AutoMirrored.Filled.List,
-                                contentDescription = "Options",
-                                tint = Color.White,
-                                modifier = Modifier.size(40.dp)
-                            )
-                        }
-                    }
-                    else {
-                        IconButton(onClick = {
-                            selectedMenuItem = MenuItem.AddClip
-                        }) {
-                            Icon(
-                                imageVector = Icons.Filled.Add,
-                                contentDescription = "Options",
-                                tint = Color.White,
-                                modifier = Modifier.size(40.dp)
-                            )
-                        }
-                    }
-                }
-            )
+            TopAppBarProvider(
+                currentScreen = currentBottomScreen,
+                canNavigateBack = navController.previousBackStackEntry != null
+            ) { navController.navigateUp() }
         },
-        content = {
-            when (selectedMenuItem) {
-                MenuItem.AddClip -> ScreenClip(modifier = modifier, clips = clips)
-                MenuItem.ClipList -> ScreenClipList(modifier = modifier, clips = clips)
-                else -> {}
-            }
+        content = { paddingValues ->
+            NavHostProvider(
+                modifier = modifier,
+                navController = navController,
+                paddingValues = paddingValues,
+                clips = clips)
+        },
+        bottomBar = {
+            BottomAppBarProvider(navController,
+                currentScreen = currentBottomScreen,)
         }
     )
 }

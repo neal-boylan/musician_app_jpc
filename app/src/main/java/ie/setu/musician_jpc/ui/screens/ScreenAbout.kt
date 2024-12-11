@@ -1,8 +1,12 @@
 package ie.setu.musician_jpc.ui.screens
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -10,6 +14,8 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -25,46 +31,38 @@ import ie.setu.musician_jpc.ui.components.general.Centre
 import ie.setu.musician_jpc.ui.theme.Musician_jpcTheme
 
 @Composable
-fun ScreenClipList(modifier: Modifier = Modifier,
-                   clips: SnapshotStateList<ClipModel>
+fun ScreenAbout(modifier: Modifier = Modifier
 ) {
-
-    Column {
-        Column(
-            modifier = modifier.padding(
-                // top = 48.dp,
-                start = 24.dp,
-                end = 24.dp
-            ),
+    Column(
+        modifier = modifier.background(MaterialTheme.colorScheme.secondary),
+    ) {
+        Centre(Modifier
+            .fillMaxWidth()
+            .padding(top = 96.dp,)
         ) {
-            ClipListText()
-
-            if (clips.isEmpty()) {
-                Centre(Modifier.fillMaxSize()) {
-                    Text(
-                        color = MaterialTheme.colorScheme.secondary,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 30.sp,
-                        lineHeight = 34.sp,
-                        textAlign = TextAlign.Center,
-                        text = stringResource(R.string.empty_list)
-                    )
-                }
-            } else {
-                ClipCardList(
-                    clips = clips
-                )
-            }
+            Image(
+                painter = painterResource(id = R.drawable.instruments),
+                contentDescription = "homer image",
+                modifier = Modifier.size(350.dp)
+            )
+        }
+        Centre(Modifier.fillMaxSize()) {
+            Text(color = Color.White,
+                fontWeight = FontWeight.Bold,
+                fontSize = 30.sp,
+                lineHeight = 34.sp,
+                textAlign = TextAlign.Center,
+                text = stringResource(R.string.about_message)
+            )
         }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun ReportScreenPreview() {
+fun AboutScreenPreview() {
     Musician_jpcTheme {
-        ScreenClipList( modifier = Modifier,
-            clips = fakeClips.toMutableStateList()
+        ScreenAbout( modifier = Modifier
         )
     }
 }

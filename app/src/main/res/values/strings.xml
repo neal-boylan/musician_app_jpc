@@ -6,7 +6,7 @@
     <string name="video">Video</string>
     <string name="audio">Audio</string>
     <string name="amount">Amount</string>
-    <string name="totalClips">Total Clips: </string>
+    <string name="totalClips">"Total Clips: "</string>
     <string name="totalSoFar">€%d</string>
     <string name="limitExceeded">"A Donation of €%d will exceed Maximum Donations of €10000"</string>
     <string name="clipsTitle">Clip List</string>
@@ -17,4 +17,6 @@
     <string name="show_less">Show Less</string>
     <string name="show_more">Show More</string>
     <string name="empty_list">No Clips Yet - Go make some music!</string>
+    <string name="about_title">Find Someone to Jam With!</string>
+    <string name="about_message">Upload clips of your skills and share with the World</string>
 </resources>

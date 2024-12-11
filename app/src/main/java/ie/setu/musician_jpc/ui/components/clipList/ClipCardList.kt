@@ -26,6 +26,7 @@ internal fun ClipCardList(
             ClipCard(
                 mediaType = clip.mediaType,
                 instrument = clip.instrument,
+                genres = clip.genres,
                 message = clip.message,
                 dateAdded = DateFormat.getDateTimeInstance().format(clip.dateAdded),
             )

@@ -23,7 +23,6 @@ import ie.setu.musician_jpc.data.ClipModel
 import ie.setu.musician_jpc.data.fakeClips
 import ie.setu.musician_jpc.ui.components.addClip.AddClipButton
 import ie.setu.musician_jpc.ui.components.addClip.ChipGroupString
-// import ie.setu.musician_jpc.ui.components.addClip.GenreChipsString
 import ie.setu.musician_jpc.ui.components.addClip.InstrumentPicker
 import ie.setu.musician_jpc.ui.components.addClip.MessageInput
 import ie.setu.musician_jpc.ui.components.addClip.ProgressBar
@@ -38,15 +37,15 @@ fun ScreenClip(modifier: Modifier = Modifier,
 
     var mediaType by remember { mutableStateOf("Video") }
     var instrument by remember { mutableStateOf("Guitar") }
-    var genres = remember { mutableStateListOf("Rock", "Pop") }
     var clipMessage by remember { mutableStateOf("Go Homer!") }
     var totalClips by remember { mutableIntStateOf(0) }
-    var msg: String = ""
-    val selectedGenre: MutableState<List<String?>> = remember {mutableStateOf(listOf())}
+    val selectedGenre: MutableState<List<String>> = remember {mutableStateOf(listOf())}
+    val possibleGenres = listOf("Rock", "Pop", "Jazz", "Blues", "Rap", "Metal", "Alternative", "Other")
+
     Column {
         Column(
             modifier = modifier.padding(
-                top = 48.dp,
+                // top = 48.dp,
                 start = 24.dp,
                 end = 24.dp
             ),
@@ -68,10 +67,12 @@ fun ScreenClip(modifier: Modifier = Modifier,
                 )
             }
 
-            ChipGroupString(genres = genres,
+            ChipGroupString(
+                modifier = modifier.padding(top = 8.dp,bottom = 8.dp),
+                genres = possibleGenres,
                 selectedGenres = selectedGenre.value,
                 onSelectedChanged = {
-                    val oldList: MutableList<String?> = selectedGenre.value.toMutableList()
+                    val oldList: MutableList<String> = selectedGenre.value.toMutableList()
                     val genreFromString = it
 
                     if(oldList.contains(genreFromString)){
@@ -83,12 +84,12 @@ fun ScreenClip(modifier: Modifier = Modifier,
                     selectedGenre.value = oldList
                 })
 
+            /*ProgressBar(
+                modifier = modifier.padding(top = 80.dp,bottom = 24.dp),
+                totalClips = totalClips)*/
 
-            ProgressBar(
-                modifier = modifier,
-                totalClips = totalClips)
             MessageInput(
-                modifier = modifier,
+                modifier = modifier.padding(top = 80.dp,bottom = 24.dp),
                 onMessageChange = { clipMessage = it }
             )
             AddClipButton (
@@ -97,7 +98,7 @@ fun ScreenClip(modifier: Modifier = Modifier,
                     mediaType = mediaType,
                     instrument = instrument,
                     genres = selectedGenre.value,
-                    message = msg),
+                    message = clipMessage),
                 clips = clips,
                 onTotalClipsChange = { totalClips = it }
             )

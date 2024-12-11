@@ -1,10 +1,14 @@
 package ie.setu.musician_jpc.ui.components.addClip
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.MaterialTheme
@@ -25,26 +29,33 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import timber.log.Timber
 
-// @Preview(showBackground = true)
+@OptIn(ExperimentalLayoutApi::class)
+@Preview(showBackground = true)
 @Composable
 fun ChipGroupString(
-    genres: List<String> = listOf("Rock", "Pop", "Jazz", "Blues", "Rap", "Metal"),
+    modifier: Modifier = Modifier,
+    genres: List<String> = listOf(),
     selectedGenres: List<String?> = listOf(),
     onSelectedChanged: (String) -> Unit = {},
 ) {
 
-    val possibleGenres= listOf("Rock", "Pop", "Jazz", "Blues", "Rap", "Metal")
+    // val possibleGenres= listOf("Rock", "Pop", "Jazz", "Blues", "Rap", "Metal", "Alternative", "Other")
 
     Column(modifier = Modifier.padding(8.dp)) {
-        LazyRow {
-            items(possibleGenres) {
-                ChipString(
-                    name = it,
-                    isSelected = selectedGenres.contains(it),
-                    onSelectionChanged = {
-                        onSelectedChanged(it)
-                    },
-                )
+        // https://stackoverflow.com/questions/68979046/how-to-do-multiline-chip-group-in-jetpack-compose
+        // https://developer.android.com/develop/ui/compose/layouts/flow
+        FlowRow (
+            modifier = Modifier,
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+        ){
+            genres.forEach { it ->
+                    ChipString(
+                        name = it,
+                        isSelected = selectedGenres.contains(it),
+                        onSelectionChanged = {
+                            onSelectedChanged(it)
+                        },
+                    )
             }
         }
     }
