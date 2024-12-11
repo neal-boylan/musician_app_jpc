@@ -1,4 +1,4 @@
-package ie.setu.musician_jpc.ui.screens
+package ie.setu.musician_jpc.ui.screens.clip
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,7 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -24,20 +23,20 @@ import ie.setu.musician_jpc.data.fakeClips
 import ie.setu.musician_jpc.ui.components.addClip.AddClipButton
 import ie.setu.musician_jpc.ui.components.addClip.ChipGroupString
 import ie.setu.musician_jpc.ui.components.addClip.InstrumentPicker
-import ie.setu.musician_jpc.ui.components.addClip.MessageInput
-import ie.setu.musician_jpc.ui.components.addClip.ProgressBar
+import ie.setu.musician_jpc.ui.components.addClip.DescriptionInput
 import ie.setu.musician_jpc.ui.components.addClip.RadioButtonGroup
+import ie.setu.musician_jpc.ui.components.addClip.TitleInput
 import ie.setu.musician_jpc.ui.components.addClip.WelcomeText
 import ie.setu.musician_jpc.ui.theme.Musician_jpcTheme
 
 @Composable
-fun ScreenClip(modifier: Modifier = Modifier,
+fun ClipScreen(modifier: Modifier = Modifier,
                clips: SnapshotStateList<ClipModel>
 ) {
-
+    var clipTitle by remember { mutableStateOf("Sweet Child O Mine") }
+    var clipDescription by remember { mutableStateOf("Go Homer!") }
     var mediaType by remember { mutableStateOf("Video") }
     var instrument by remember { mutableStateOf("Guitar") }
-    var clipMessage by remember { mutableStateOf("Go Homer!") }
     var totalClips by remember { mutableIntStateOf(0) }
     val selectedGenre: MutableState<List<String>> = remember {mutableStateOf(listOf())}
     val possibleGenres = listOf("Rock", "Pop", "Jazz", "Blues", "Rap", "Metal", "Alternative", "Other")
@@ -53,6 +52,16 @@ fun ScreenClip(modifier: Modifier = Modifier,
         ) {
 
             WelcomeText()
+
+            TitleInput(
+                modifier = modifier.padding(top = 80.dp,bottom = 24.dp),
+                onTitleChange = { clipTitle = it }
+            )
+
+            DescriptionInput(
+                modifier = modifier.padding(top = 80.dp,bottom = 24.dp),
+                onDescriptionChange = { clipDescription = it }
+            )
             Row(
                 verticalAlignment = Alignment.CenterVertically,
             )
@@ -88,17 +97,15 @@ fun ScreenClip(modifier: Modifier = Modifier,
                 modifier = modifier.padding(top = 80.dp,bottom = 24.dp),
                 totalClips = totalClips)*/
 
-            MessageInput(
-                modifier = modifier.padding(top = 80.dp,bottom = 24.dp),
-                onMessageChange = { clipMessage = it }
-            )
             AddClipButton (
                 modifier = modifier,
                 clip = ClipModel(
+                    title = clipTitle,
+                    description = clipDescription,
                     mediaType = mediaType,
                     instrument = instrument,
                     genres = selectedGenre.value,
-                    message = clipMessage),
+                    ),
                 clips = clips,
                 onTotalClipsChange = { totalClips = it }
             )
@@ -110,7 +117,7 @@ fun ScreenClip(modifier: Modifier = Modifier,
 @Composable
 fun ClipScreenPreview() {
     Musician_jpcTheme {
-        ScreenClip( modifier = Modifier,
+        ClipScreen( modifier = Modifier,
             clips = fakeClips.toMutableStateList())
     }
 }

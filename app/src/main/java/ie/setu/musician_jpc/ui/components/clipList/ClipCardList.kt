@@ -24,10 +24,11 @@ internal fun ClipCardList(
             key = { clip -> clip.id }
         ) { clip ->
             ClipCard(
+                title = clip.title,
+                description = clip.description,
                 mediaType = clip.mediaType,
                 instrument = clip.instrument,
                 genres = clip.genres,
-                message = clip.message,
                 dateAdded = DateFormat.getDateTimeInstance().format(clip.dateAdded),
             )
         }

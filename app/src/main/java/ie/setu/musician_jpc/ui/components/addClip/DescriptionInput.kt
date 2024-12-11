@@ -17,12 +17,12 @@ import ie.setu.musician_jpc.R
 import ie.setu.musician_jpc.ui.theme.Musician_jpcTheme
 
 @Composable
-fun MessageInput(
+fun DescriptionInput(
     modifier: Modifier = Modifier,
-    onMessageChange: (String) -> Unit
+    onDescriptionChange: (String) -> Unit
 ) {
 
-    var message by remember { mutableStateOf("") }
+    var description by remember { mutableStateOf("") }
 
     OutlinedTextField(
         colors = OutlinedTextFieldDefaults.colors(
@@ -31,13 +31,13 @@ fun MessageInput(
             unfocusedBorderColor = MaterialTheme.colorScheme.secondary,
         ),
         maxLines = 2,
-        value = message,
+        value = description,
         onValueChange = {
-            message = it
-            onMessageChange(message)
+            description = it
+            onDescriptionChange(description)
         },
         modifier = modifier.fillMaxWidth(),
-        label = { Text(stringResource(R.string.enter_message)) }
+        label = { Text(stringResource(R.string.add_description)) }
     )
 }
 
@@ -45,8 +45,8 @@ fun MessageInput(
 @Composable
 fun MessagePreview() {
     Musician_jpcTheme {
-        MessageInput(
+        DescriptionInput(
             Modifier,
-            onMessageChange = {})
+            onDescriptionChange = {})
     }
 }

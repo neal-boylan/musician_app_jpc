@@ -1,24 +1,30 @@
 package ie.setu.musician_jpc.data
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.util.Date
 import kotlin.random.Random
 
+@Entity
 data class ClipModel(
-    val id: Int = Random.nextInt(1, 100000),
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
+    val title: String = "N/A",
+    val description: String = "Just a little something",
     val mediaType: String = "N/A",
     val instrument: String = "N/A",
     val genres: List<String> = arrayListOf(),
-    val message: String = "Just a little something",
     val dateAdded: Date = Date()
 )
 
 val fakeClips = List(30) { i ->
     ClipModel(
         id = 12345 + i,
-        "PayPal $i",
+        "My 1st clip",
+        "A real crowd pleaser",
+        "Audio $i",
         "Guitar $i",
         arrayListOf(),
-        "Message $i",
         Date()
     )
 }

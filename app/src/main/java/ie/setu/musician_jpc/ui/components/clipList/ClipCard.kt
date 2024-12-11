@@ -8,9 +8,11 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AudioFile
 import androidx.compose.material.icons.filled.Business
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
+import androidx.compose.material.icons.filled.VideoCameraFront
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -36,10 +38,11 @@ import java.util.Date
 
 @Composable
 fun ClipCard(
+    title: String,
+    description: String,
     mediaType: String,
     instrument: String,
     genres: List<String>,
-    message: String,
     dateAdded: String
 ) {
     Card(
@@ -49,20 +52,22 @@ fun ClipCard(
         modifier = Modifier.padding(vertical = 4.dp, horizontal = 2.dp)
     ) {
         ClipCardContent(
+            title,
+            description,
             mediaType,
             instrument,
             genres,
-            message,
             dateAdded)
     }
 }
 
 @Composable
 private fun ClipCardContent(
+    title: String,
+    description: String,
     mediaType: String,
     instrument: String,
     genres: List<String>,
-    message: String,
     dateAdded: String
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -83,32 +88,41 @@ private fun ClipCardContent(
                 .padding(4.dp)
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(
-                    imageVector = Icons.Filled.Business,
-                    "Donation Status",
-                    Modifier.padding(end = 8.dp)
-                )
+                if (mediaType == "Audio") {
+                    Icon(
+                        imageVector = Icons.Filled.AudioFile,
+                        "Clip Media Type",
+                        Modifier.padding(end = 8.dp)
+                    )
+                } else {
+                    Icon(
+                        imageVector = Icons.Filled.VideoCameraFront ,
+                        "Clip Media Type",
+                        Modifier.padding(end = 8.dp)
+                    )
+                }
                 Text(
-                    text = mediaType,
+                    text = title,
                     style = MaterialTheme.typography.headlineMedium.copy(
                         fontWeight = FontWeight.ExtraBold
                     )
                 )
-                Spacer(Modifier.weight(1f))
-                Text(
-                    text = instrument,
-                    style = MaterialTheme.typography.headlineMedium.copy(
-                        fontWeight = FontWeight.ExtraBold
-                    )
-                )
+
             }
+            Text(
+                text = instrument,
+                style = MaterialTheme.typography.headlineSmall.copy(
+                    fontWeight = FontWeight.SemiBold
+                )
+            )
+
             Text(
                 text = "Clip added on $dateAdded", style = MaterialTheme.typography.labelSmall
             )
 
             ChipGroupString(genres = genres)
             if (expanded) {
-                Text(modifier = Modifier.padding(vertical = 16.dp), text = message)
+                Text(modifier = Modifier.padding(vertical = 16.dp), text = description)
             }
         }
         IconButton(onClick = { expanded = !expanded }) {
@@ -129,10 +143,11 @@ private fun ClipCardContent(
 fun DonationCardPreview() {
     Musician_jpcTheme {
         ClipCard(
-            mediaType = "Direct",
+            title = "Sweet Child O Mine",
+            description = "Chorus. I did my best!",
+            mediaType = "Video",
             instrument = "Guitar",
             genres = listOf("Rock", "Pop"),
-            message = "A description of my issue...",
             dateAdded = DateFormat.getDateTimeInstance().format(Date())
         )
     }

@@ -9,9 +9,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import ie.setu.musician_jpc.data.ClipModel
-import ie.setu.musician_jpc.ui.screens.ScreenAbout
-import ie.setu.musician_jpc.ui.screens.ScreenClip
-import ie.setu.musician_jpc.ui.screens.ScreenClipList
+import ie.setu.musician_jpc.ui.screens.about.AboutScreen
+import ie.setu.musician_jpc.ui.screens.clip.ClipScreen
+import ie.setu.musician_jpc.ui.screens.clipList.ClipListScreen
 
 @Composable
 fun NavHostProvider(
@@ -27,15 +27,15 @@ fun NavHostProvider(
 
         composable(route = ClipAdd.route) {
             //call our 'AddClip' Screen Here
-            ScreenClip(modifier = modifier, clips = clips)
+            ClipScreen(modifier = modifier, clips = clips)
         }
         composable(route = ClipList.route) {
             //call our 'ClipList' Screen Here
-            ScreenClipList(modifier = modifier, clips = clips)
+            ClipListScreen(modifier = modifier, clips = clips)
         }
         composable(route = About.route) {
             //call our 'About' Screen Here
-            ScreenAbout(modifier = modifier)
+            AboutScreen(modifier = modifier)
         }
     }
 }
