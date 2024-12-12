@@ -49,7 +49,6 @@ class MainActivity : ComponentActivity() {
 fun MusicianApp(modifier: Modifier = Modifier,
                 navController: NavHostController = rememberNavController()) {
 
-    val clips = remember { mutableStateListOf<ClipModel>() }
     val currentNavBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = currentNavBackStackEntry?.destination
     val currentBottomScreen = allDestinations.find { it.route == currentDestination?.route } ?: ClipList
@@ -67,7 +66,7 @@ fun MusicianApp(modifier: Modifier = Modifier,
                 modifier = modifier,
                 navController = navController,
                 paddingValues = paddingValues,
-                clips = clips)
+                )
         },
         bottomBar = {
             BottomAppBarProvider(navController,

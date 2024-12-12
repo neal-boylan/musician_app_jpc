@@ -18,7 +18,6 @@ fun NavHostProvider(
     modifier: Modifier,
     navController: NavHostController,
     paddingValues: PaddingValues,
-    clips: SnapshotStateList<ClipModel>
 ) {
     NavHost(
         navController = navController,
@@ -27,11 +26,11 @@ fun NavHostProvider(
 
         composable(route = ClipAdd.route) {
             //call our 'AddClip' Screen Here
-            ClipScreen(modifier = modifier, clips = clips)
+            ClipScreen(modifier = modifier)
         }
         composable(route = ClipList.route) {
             //call our 'ClipList' Screen Here
-            ClipListScreen(modifier = modifier, clips = clips)
+            ClipListScreen(modifier = modifier)
         }
         composable(route = About.route) {
             //call our 'About' Screen Here
