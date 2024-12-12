@@ -16,9 +16,12 @@ interface ClipDAO {
     @Insert
     suspend fun insert(clip: ClipModel)
 
-    @Update
-    suspend fun update(clip: ClipModel)
+    @Query("UPDATE clipmodel SET description=:description WHERE id = :id")
+    suspend fun update(id: Int, description:String)
 
     @Delete
     suspend fun delete(clip: ClipModel)
+
+    @Query("SELECT * FROM clipmodel WHERE id=:id")
+    fun get(id: Int): Flow<ClipModel>
 }

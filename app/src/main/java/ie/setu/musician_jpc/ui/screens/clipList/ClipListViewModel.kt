@@ -24,4 +24,10 @@ constructor(private val repository: RoomRepository) : ViewModel() {
             }
         }
     }
+
+    fun deleteClip(clip: ClipModel) {
+        viewModelScope.launch {
+            repository.delete(clip)
+        }
+    }
 }

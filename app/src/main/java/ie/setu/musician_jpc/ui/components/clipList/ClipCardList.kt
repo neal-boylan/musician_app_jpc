@@ -15,7 +15,9 @@ import java.text.DateFormat
 @Composable
 internal fun ClipCardList(
     clips: List<ClipModel>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onDeleteClip: (ClipModel) -> Unit,
+    onClickClipDetails: (Int) -> Unit,
 ) {
     LazyColumn {
         items(
@@ -29,6 +31,8 @@ internal fun ClipCardList(
                 instrument = clip.instrument,
                 genres = clip.genres,
                 dateAdded = DateFormat.getDateTimeInstance().format(clip.dateAdded),
+                onClickDelete = { onDeleteClip(clip) },
+                onClickClipDetails = { onClickClipDetails(clip.id) }
             )
         }
     }
@@ -40,6 +44,10 @@ internal fun ClipCardList(
 @Composable
 fun ClipCardListPreview() {
     Musician_jpcTheme {
-        ClipCardList(fakeClips.toMutableStateList())
+        ClipCardList(
+            fakeClips.toMutableStateList(),
+            onDeleteClip = { },
+            onClickClipDetails = {  }
+        )
     }
 }

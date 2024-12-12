@@ -7,15 +7,16 @@ import javax.inject.Inject
 
 class RoomRepository @Inject
 constructor(private val clipDAO: ClipDAO) {
-    fun getAll(): Flow<List<ClipModel>>
-            = clipDAO.getAll()
+    fun getAll(): Flow<List<ClipModel>> = clipDAO.getAll()
 
-    suspend fun insert(donation: ClipModel)
-    { clipDAO.insert(donation) }
+    fun get(id: Int) = clipDAO.get(id)
 
-    suspend fun update(donation: ClipModel)
-    { clipDAO.update(donation) }
+    suspend fun insert(clip: ClipModel)
+    { clipDAO.insert(clip) }
 
-    suspend fun delete(donation: ClipModel)
-    { clipDAO.delete(donation) }
+    suspend fun update(clip: ClipModel)
+    { clipDAO.update(clip.id, clip.description) }
+
+    suspend fun delete(clip: ClipModel)
+    { clipDAO.delete(clip) }
 }

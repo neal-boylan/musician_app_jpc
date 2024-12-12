@@ -3,18 +3,23 @@ package ie.setu.musician_jpc.ui.components.clipList
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AudioFile
-import androidx.compose.material.icons.filled.Business
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material.icons.filled.VideoCameraFront
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -43,7 +48,9 @@ fun ClipCard(
     mediaType: String,
     instrument: String,
     genres: List<String>,
-    dateAdded: String
+    dateAdded: String,
+    onClickDelete: () -> Unit,
+    onClickClipDetails: () -> Unit
 ) {
     Card(
         colors = CardDefaults.cardColors(
@@ -57,7 +64,9 @@ fun ClipCard(
             mediaType,
             instrument,
             genres,
-            dateAdded)
+            dateAdded,
+            onClickDelete,
+            onClickClipDetails)
     }
 }
 
@@ -68,9 +77,12 @@ private fun ClipCardContent(
     mediaType: String,
     instrument: String,
     genres: List<String>,
-    dateAdded: String
+    dateAdded: String,
+    onClickDelete: () -> Unit,
+    onClickClipDetails: () -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
+    var showDeleteConfirmDialog by remember { mutableStateOf(false) }
 
     Row(
         modifier = Modifier
@@ -121,8 +133,25 @@ private fun ClipCardContent(
             )
 
             ChipGroupString(genres = genres)
+
             if (expanded) {
                 Text(modifier = Modifier.padding(vertical = 16.dp), text = description)
+                Row(modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween) {
+                    FilledTonalButton(onClick = onClickClipDetails ) {
+                        Text(text = "Show More...")
+                    }
+
+                    FilledTonalIconButton(onClick = { showDeleteConfirmDialog = true }) {
+                        Icon(Icons.Filled.Delete, "Delete Donation")
+                    }
+                    if (showDeleteConfirmDialog) {
+                        showDeleteAlert(
+                            onDismiss = { showDeleteConfirmDialog = false },
+                            onDelete = onClickDelete
+                        )
+                    }
+                }
             }
         }
         IconButton(onClick = { expanded = !expanded }) {
@@ -138,6 +167,25 @@ private fun ClipCardContent(
     }
 }
 
+@Composable
+fun showDeleteAlert(
+    onDismiss: () -> Unit,
+    onDelete: () -> Unit) {
+    AlertDialog(
+        onDismissRequest = onDismiss ,
+        title = { Text(stringResource(id = R.string.confirm_delete)) },
+        text = { Text(stringResource(id = R.string.confirm_delete_message)) },
+        confirmButton = {
+            Button(
+                onClick = { onDelete() }
+            ) { Text("Yes") }
+        },
+        dismissButton = {
+            Button(onClick = onDismiss) { Text("No") }
+        }
+    )
+}
+
 @Preview
 @Composable
 fun DonationCardPreview() {
@@ -148,7 +196,9 @@ fun DonationCardPreview() {
             mediaType = "Video",
             instrument = "Guitar",
             genres = listOf("Rock", "Pop"),
-            dateAdded = DateFormat.getDateTimeInstance().format(Date())
+            dateAdded = DateFormat.getDateTimeInstance().format(Date()),
+            onClickDelete = {  },
+            onClickClipDetails = {  }
         )
     }
 }

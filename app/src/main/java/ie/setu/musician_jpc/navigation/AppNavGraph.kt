@@ -12,6 +12,7 @@ import ie.setu.musician_jpc.data.ClipModel
 import ie.setu.musician_jpc.ui.screens.about.AboutScreen
 import ie.setu.musician_jpc.ui.screens.clip.ClipScreen
 import ie.setu.musician_jpc.ui.screens.clipList.ClipListScreen
+import ie.setu.musician_jpc.ui.screens.details.DetailsScreen
 
 @Composable
 fun NavHostProvider(
@@ -30,11 +31,29 @@ fun NavHostProvider(
         }
         composable(route = ClipList.route) {
             //call our 'ClipList' Screen Here
-            ClipListScreen(modifier = modifier)
+            ClipListScreen(modifier = modifier,
+                onClickClipDetails = {
+                    clipId: Int ->
+                        navController.navigateToClipDetails(clipId)
+                },)
         }
         composable(route = About.route) {
             //call our 'About' Screen Here
             AboutScreen(modifier = modifier)
         }
+        composable(
+            route = Details.route,
+            arguments = Details.arguments
+        )
+        { navBackStackEntry ->
+            val id = navBackStackEntry.arguments?.getInt(Details.idArg)
+            if (id != null) {
+                DetailsScreen()
+            }
+        }
     }
+}
+
+private fun NavHostController.navigateToClipDetails(clipId: Int) {
+    this.navigate("details/$clipId")
 }
