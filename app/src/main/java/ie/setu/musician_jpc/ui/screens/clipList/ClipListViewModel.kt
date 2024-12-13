@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ie.setu.musician_jpc.data.model.ClipModel
-import ie.setu.musician_jpc.data.api.RetrofitRepository
 import ie.setu.musician_jpc.firebase.services.AuthService
 import ie.setu.musician_jpc.firebase.services.FirestoreService
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,14 +24,6 @@ constructor(private val repository: FirestoreService,
     var isErr = mutableStateOf(false)
     var isLoading = mutableStateOf(false)
     var error = mutableStateOf(Exception())
-
-//    init {
-//        viewModelScope.launch {
-//            repository.getAll().collect { listOfClips ->
-//                _clips.value = listOfClips
-//            }
-//        }
-//    }
 
     init { getClips() }
 

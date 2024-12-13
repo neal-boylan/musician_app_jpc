@@ -35,7 +35,7 @@ fun ClipListScreen(modifier: Modifier = Modifier,
     val isLoading = clipListViewModel.isLoading.value
     val error = clipListViewModel.error.value
 
-    Timber.i("RS : ie.setu.musician_jpc.firebase.services.Clips List = $clips")
+    Timber.i("RS : Clips List = $clips")
 
     Column {
         Column(
@@ -44,7 +44,7 @@ fun ClipListScreen(modifier: Modifier = Modifier,
                 end = 24.dp
             ),
         ) {
-            if(isLoading) ShowLoader("Loading ie.setu.musician_jpc.firebase.services.Clips...")
+            if(isLoading) ShowLoader("Loading Clips...")
             ClipListText()
 //            if(!isError)
 //                ShowRefreshList(onClick = { reportViewModel.getDonations() })
