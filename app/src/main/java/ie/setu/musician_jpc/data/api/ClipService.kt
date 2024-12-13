@@ -10,14 +10,14 @@ import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface ClipService {
-    @GET(ServiceEndPoints.CLIPS_ENDPOINT)
+    @GET(ServiceEndPoints.CLIPS_ENDPOINT + "/{email}")
     suspend fun getall(@Path("email") email: String): Response<List<ClipModel>>
 
-    @GET(ServiceEndPoints.CLIPS_ENDPOINT + "/{id}")
+    @GET(ServiceEndPoints.CLIPS_ENDPOINT + "/{email}" + "/{id}")
     suspend fun get(@Path("email") email: String,
                     @Path("id") id: String): Response<List<ClipModel>>
 
-    @DELETE(ServiceEndPoints.CLIPS_ENDPOINT + "/{id}")
+    @DELETE(ServiceEndPoints.CLIPS_ENDPOINT + "/{email}" + "/{id}")
     suspend fun delete(@Path("email") email: String,
                        @Path("id") id: String): ClipWrapper
 
@@ -25,7 +25,7 @@ interface ClipService {
     suspend fun post(@Path("email") email: String,
                      @Body donation: ClipModel): ClipWrapper
 
-    @PUT(ServiceEndPoints.CLIPS_ENDPOINT + "/{id}")
+    @PUT(ServiceEndPoints.CLIPS_ENDPOINT + "/{email}" + "/{id}")
     suspend fun put(@Path("email") email: String,
                     @Path("id") id: String,
                     @Body donation: ClipModel

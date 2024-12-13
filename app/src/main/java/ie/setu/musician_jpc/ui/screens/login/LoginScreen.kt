@@ -129,7 +129,7 @@ fun LoginScreen(
 @Preview
 @Composable
 fun LoginScreenPreview() {
-    Musician_jpcTheme {  } {
+    Musician_jpcTheme {
         PreviewLoginScreen()
     }
 }

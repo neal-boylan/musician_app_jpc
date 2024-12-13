@@ -18,7 +18,6 @@ internal fun ClipCardList(
     modifier: Modifier = Modifier,
     onDeleteClip: (ClipModel) -> Unit,
     onClickClipDetails: (String) -> Unit,
-    onRefreshList: () -> Unit,
 ) {
     LazyColumn {
         items(
@@ -34,8 +33,7 @@ internal fun ClipCardList(
                 dateAdded = DateFormat.getDateTimeInstance().format(clip.dateAdded),
                 dateModified = DateFormat.getDateTimeInstance().format(clip.dateModified),
                 onClickDelete = { onDeleteClip(clip) },
-                onClickClipDetails = { onClickClipDetails(clip._id) },
-                onRefreshList = onRefreshList
+                onClickClipDetails = { onClickClipDetails(clip._id) }
             )
         }
     }
@@ -50,8 +48,7 @@ fun ClipCardListPreview() {
         ClipCardList(
             fakeClips.toMutableStateList(),
             onDeleteClip = { },
-            onClickClipDetails = { },
-            onRefreshList = { }
+            onClickClipDetails = { }
         )
     }
 }

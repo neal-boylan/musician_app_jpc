@@ -3,6 +3,8 @@ package ie.setu.musician_jpc.ui.components.clipList
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -31,6 +33,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -38,6 +42,8 @@ import androidx.compose.ui.unit.dp
 import ie.setu.musician_jpc.R
 import ie.setu.musician_jpc.ui.components.addClip.ChipGroupString
 import ie.setu.musician_jpc.ui.theme.Musician_jpcTheme
+import ie.setu.musician_jpc.ui.theme.endGradientColor
+import ie.setu.musician_jpc.ui.theme.startGradientColor
 import java.text.DateFormat
 import java.util.Date
 
@@ -51,10 +57,10 @@ fun ClipCard(
     dateAdded: String,
     dateModified: String,
     onClickDelete: () -> Unit,
-    onClickClipDetails: () -> Unit,
-    onRefreshList: () -> Unit
+    onClickClipDetails: () -> Unit
 ) {
     Card(
+        border = BorderStroke(1.dp, Color.Black),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primary
         ),
@@ -69,8 +75,7 @@ fun ClipCard(
             dateAdded,
             dateModified,
             onClickDelete,
-            onClickClipDetails,
-            onRefreshList)
+            onClickClipDetails)
     }
 }
 
@@ -84,8 +89,7 @@ private fun ClipCardContent(
     dateAdded: String,
     dateModified: String,
     onClickDelete: () -> Unit,
-    onClickClipDetails: () -> Unit,
-    onRefreshList: () -> Unit
+    onClickClipDetails: () -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
     var showDeleteConfirmDialog by remember { mutableStateOf(false) }
@@ -99,6 +103,12 @@ private fun ClipCardContent(
                     stiffness = Spring.StiffnessLow
                 )
             )
+            .background(brush = Brush.horizontalGradient(
+                colors = listOf(
+                    startGradientColor,
+                    endGradientColor,
+                )
+            ))
     ) {
         Column(
             modifier = Modifier
@@ -152,13 +162,12 @@ private fun ClipCardContent(
                     }
 
                     FilledTonalIconButton(onClick = { showDeleteConfirmDialog = true }) {
-                        Icon(Icons.Filled.Delete, "Delete Donation")
+                        Icon(Icons.Filled.Delete, "Delete ie.setu.donationx.firebase.services.Donation")
                     }
                     if (showDeleteConfirmDialog) {
                         showDeleteAlert(
                             onDismiss = { showDeleteConfirmDialog = false },
-                            onDelete = onClickDelete,
-                            onRefresh = onRefreshList
+                            onDelete = onClickDelete
                         )
                     }
                 }
@@ -180,8 +189,7 @@ private fun ClipCardContent(
 @Composable
 fun showDeleteAlert(
     onDismiss: () -> Unit,
-    onDelete: () -> Unit,
-    onRefresh: () -> Unit
+    onDelete: () -> Unit
 ) {
     AlertDialog(
         onDismissRequest = onDismiss ,
@@ -191,7 +199,6 @@ fun showDeleteAlert(
             Button(
                 onClick = {
                     onDelete()
-                    onRefresh()
                 }
             ) { Text("Yes") }
         },
@@ -214,8 +221,7 @@ fun DonationCardPreview() {
             dateAdded = DateFormat.getDateTimeInstance().format(Date()),
             dateModified = DateFormat.getDateTimeInstance().format(Date()),
             onClickDelete = { },
-            onClickClipDetails = { },
-            onRefreshList = { }
+            onClickClipDetails = { }
         )
     }
 }

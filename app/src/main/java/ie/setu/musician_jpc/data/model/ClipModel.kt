@@ -2,13 +2,14 @@ package ie.setu.musician_jpc.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.firebase.firestore.DocumentId
 import java.util.Date
 
 @Entity
 data class ClipModel(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val _id: String = "N/A",
+    @DocumentId val _id: String = "N/A",
     var title: String = "N/A",
     var description: String = "Just a little something",
     val mediaType: String = "N/A",

@@ -6,6 +6,8 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ie.setu.musician_jpc.data.model.ClipModel
 import ie.setu.musician_jpc.data.api.RetrofitRepository
+import ie.setu.musician_jpc.firebase.services.AuthService
+import ie.setu.musician_jpc.firebase.services.FirestoreService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -15,7 +17,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ClipListViewModel @Inject
-constructor(private val repository: RetrofitRepository) : ViewModel() {
+constructor(private val repository: FirestoreService,
+            private val authService: AuthService
+) : ViewModel() {
     private val _clips = MutableStateFlow<List<ClipModel>>(emptyList())
     val uiClips: StateFlow<List<ClipModel>> = _clips.asStateFlow()
     var isErr = mutableStateOf(false)
@@ -36,9 +40,12 @@ constructor(private val repository: RetrofitRepository) : ViewModel() {
         viewModelScope.launch {
             try {
                 isLoading.value = true
-                _clips.value = repository.getAll()
-                isErr.value = false
-                isLoading.value = false
+                repository.getAll(authService.email!!).collect { items ->
+                    _clips.value = items
+                    isErr.value = false
+                    isLoading.value = false
+                }
+                Timber.i("DVM RVM = : ${_clips.value}")
             }
             catch(e:Exception) {
                 isErr.value = true
@@ -49,9 +56,8 @@ constructor(private val repository: RetrofitRepository) : ViewModel() {
         }
     }
 
-    fun deleteClip(clip: ClipModel) {
-        viewModelScope.launch {
-            repository.delete(clip)
-        }
+    fun deleteClip(clip: ClipModel)
+    = viewModelScope.launch {
+        repository.delete(authService.email!!, clip._id)
     }
 }

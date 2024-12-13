@@ -13,6 +13,8 @@ import ie.setu.musician_jpc.ui.screens.clipList.ClipListScreen
 import ie.setu.musician_jpc.ui.screens.details.DetailsScreen
 import ie.setu.musician_jpc.ui.screens.home.HomeScreen
 import ie.setu.musician_jpc.ui.screens.login.LoginScreen
+import ie.setu.musician_jpc.ui.screens.profile.ProfileScreen
+import ie.setu.musician_jpc.ui.screens.register.RegisterScreen
 
 @Composable
 fun NavHostProvider(

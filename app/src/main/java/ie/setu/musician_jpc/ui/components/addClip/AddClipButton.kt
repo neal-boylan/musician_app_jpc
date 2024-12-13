@@ -46,6 +46,10 @@ fun AddClipButton(
     val context = LocalContext.current
     val clips = clipListViewModel.uiClips.collectAsState().value
     val totalClips = clips.size
+
+    val isError = clipViewModel.isErr.value
+    val error = clipViewModel.error.value
+
     Row {
         Button(
             onClick = {
@@ -90,6 +94,11 @@ fun AddClipButton(
                 }
             })
     }
+    Timber.i("DVM Button = : ${error.message}")
+    //Required to refresh our 'totalDonated'
+    if(isError)
+        Toast.makeText(context,"Unable to Donate at this Time...",
+            Toast.LENGTH_SHORT).show()
 }
 
 @Composable

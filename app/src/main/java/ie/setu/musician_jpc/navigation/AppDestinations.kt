@@ -72,4 +72,5 @@ object Register : AppDestination {
 }
 
 val bottomAppBarDestinations = listOf(About, ClipAdd, ClipList, Profile)
+val userSignedOutDestinations = listOf(Login, Register)
 val allDestinations = listOf(ClipList, ClipAdd, About, Details, Home, Profile, Login, Register)

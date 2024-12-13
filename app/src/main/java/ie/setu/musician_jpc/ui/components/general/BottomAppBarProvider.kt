@@ -24,7 +24,8 @@ import ie.setu.musician_jpc.ui.theme.Musician_jpcTheme
 @Composable
 fun BottomAppBarProvider(
     navController: NavHostController,
-    currentScreen: AppDestination
+    currentScreen: AppDestination,
+    userDestinations: List<AppDestination>
 ) {
     //initializing the default selected item
     var navigationSelectedItem by remember { mutableIntStateOf(0) }
@@ -74,6 +75,7 @@ fun BottomAppBarScreenPreview() {
     Musician_jpcTheme {
         BottomAppBarProvider(
             rememberNavController(),
-            bottomAppBarDestinations.get(1))
+            bottomAppBarDestinations.get(1),
+            bottomAppBarDestinations)
     }
 }
