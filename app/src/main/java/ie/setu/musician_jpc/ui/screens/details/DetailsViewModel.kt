@@ -7,12 +7,15 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ie.setu.musician_jpc.data.model.ClipModel
 import ie.setu.musician_jpc.data.api.RetrofitRepository
+import ie.setu.musician_jpc.firebase.services.AuthService
+import ie.setu.musician_jpc.firebase.services.FirestoreService
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class DetailsViewModel @Inject
-constructor(private val repository: RetrofitRepository,
+constructor(private val repository: FirestoreService,
+            private val authService: AuthService,
             savedStateHandle: SavedStateHandle
             ) : ViewModel() {
 
@@ -26,7 +29,7 @@ constructor(private val repository: RetrofitRepository,
         viewModelScope.launch {
             try {
                 isLoading.value = true
-                clip.value = repository.get(id)[0]
+                clip.value = repository.get(authService.email!!, id)!!
                 isErr.value = false
                 isLoading.value = false
             } catch (e: Exception) {
@@ -41,7 +44,7 @@ constructor(private val repository: RetrofitRepository,
         viewModelScope.launch {
             try {
                 isLoading.value = true
-                repository.update(clip)
+                repository.update(authService.email!!, clip)
                 isErr.value = false
                 isLoading.value = false
             } catch (e: Exception) {

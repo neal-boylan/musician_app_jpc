@@ -35,7 +35,7 @@ fun BottomAppBarProvider(
         contentColor = MaterialTheme.colorScheme.onSecondary,
     ) {
         //getting the list of bottom navigation items
-        bottomAppBarDestinations.forEachIndexed { index, navigationItem ->
+        userDestinations.forEachIndexed { index, navigationItem ->
             //iterating all items with their respective indexes
             NavigationBarItem(
                 selected = navigationItem == currentScreen,
@@ -45,15 +45,8 @@ fun BottomAppBarProvider(
                     unselectedIconColor = White,
                     unselectedTextColor = Black
                 ),
-                label = {
-                    Text(text = navigationItem.label)
-                },
-                icon = {
-                    Icon(
-                        navigationItem.icon,
-                        contentDescription = navigationItem.label
-                    )
-                },
+                label = { Text(text = navigationItem.label) },
+                icon = { Icon(navigationItem.icon, contentDescription = navigationItem.label) },
                 onClick = {
                     navigationSelectedItem = index
                     navController.navigate(navigationItem.route) {
