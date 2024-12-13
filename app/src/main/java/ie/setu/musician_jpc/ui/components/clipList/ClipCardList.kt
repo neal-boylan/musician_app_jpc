@@ -7,8 +7,8 @@ import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.Wallpapers
-import ie.setu.musician_jpc.data.ClipModel
-import ie.setu.musician_jpc.data.fakeClips
+import ie.setu.musician_jpc.data.model.ClipModel
+import ie.setu.musician_jpc.data.model.fakeClips
 import ie.setu.musician_jpc.ui.theme.Musician_jpcTheme
 import java.text.DateFormat
 
@@ -17,12 +17,13 @@ internal fun ClipCardList(
     clips: List<ClipModel>,
     modifier: Modifier = Modifier,
     onDeleteClip: (ClipModel) -> Unit,
-    onClickClipDetails: (Int) -> Unit,
+    onClickClipDetails: (String) -> Unit,
+    onRefreshList: () -> Unit,
 ) {
     LazyColumn {
         items(
             items = clips,
-            key = { clip -> clip.id }
+            key = { clip -> clip._id }
         ) { clip ->
             ClipCard(
                 title = clip.title,
@@ -31,8 +32,10 @@ internal fun ClipCardList(
                 instrument = clip.instrument,
                 genres = clip.genres,
                 dateAdded = DateFormat.getDateTimeInstance().format(clip.dateAdded),
+                dateModified = DateFormat.getDateTimeInstance().format(clip.dateModified),
                 onClickDelete = { onDeleteClip(clip) },
-                onClickClipDetails = { onClickClipDetails(clip.id) }
+                onClickClipDetails = { onClickClipDetails(clip._id) },
+                onRefreshList = onRefreshList
             )
         }
     }
@@ -47,7 +50,8 @@ fun ClipCardListPreview() {
         ClipCardList(
             fakeClips.toMutableStateList(),
             onDeleteClip = { },
-            onClickClipDetails = {  }
+            onClickClipDetails = { },
+            onRefreshList = { }
         )
     }
 }

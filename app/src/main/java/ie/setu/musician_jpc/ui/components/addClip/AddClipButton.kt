@@ -28,8 +28,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import ie.setu.musician_jpc.R
-import ie.setu.musician_jpc.data.ClipModel
-import ie.setu.musician_jpc.data.fakeClips
+import ie.setu.musician_jpc.data.model.ClipModel
+import ie.setu.musician_jpc.data.model.fakeClips
 import ie.setu.musician_jpc.ui.screens.clip.ClipViewModel
 import ie.setu.musician_jpc.ui.screens.clipList.ClipListViewModel
 import ie.setu.musician_jpc.ui.theme.Musician_jpcTheme

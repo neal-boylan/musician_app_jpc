@@ -16,17 +16,23 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import ie.setu.musician_jpc.R
-import ie.setu.musician_jpc.data.ClipModel
+import ie.setu.musician_jpc.data.model.ClipModel
 import ie.setu.musician_jpc.ui.components.clipList.ClipCardList
 import ie.setu.musician_jpc.ui.components.clipList.ClipListText
 import ie.setu.musician_jpc.ui.components.general.Centre
+import ie.setu.musician_jpc.ui.components.general.ShowError
+import ie.setu.musician_jpc.ui.components.general.ShowLoader
+import ie.setu.musician_jpc.ui.components.general.ShowRefreshList
 
 @Composable
 fun ClipListScreen(modifier: Modifier = Modifier,
-                   onClickClipDetails: (Int) -> Unit,
+                   onClickClipDetails: (String) -> Unit,
                    clipListViewModel: ClipListViewModel = hiltViewModel())
 {
     val clips = clipListViewModel.uiClips.collectAsState().value
+    val isError = clipListViewModel.isErr.value
+    val isLoading = clipListViewModel.isLoading.value
+    val error = clipListViewModel.error.value
 
     Column {
         Column(
@@ -36,9 +42,11 @@ fun ClipListScreen(modifier: Modifier = Modifier,
                 end = 24.dp
             ),
         ) {
+            if(isLoading) ShowLoader("Loading Clips...")
             ClipListText()
+            if(!isError) ShowRefreshList(onClick = { clipListViewModel.getClips() })
 
-            if (clips.isEmpty()) {
+            if (clips.isEmpty() && !isError) {
                 Centre(Modifier.fillMaxSize()) {
                     Text(
                         color = MaterialTheme.colorScheme.secondary,
@@ -49,14 +57,19 @@ fun ClipListScreen(modifier: Modifier = Modifier,
                         text = stringResource(R.string.empty_list)
                     )
                 }
-            } else {
+            }
+            if (!isError) {
                 ClipCardList(
                     clips = clips,
                     onClickClipDetails = onClickClipDetails,
-                    onDeleteClip = {
-                            clip: ClipModel -> clipListViewModel.deleteClip(clip)
-                    }
+                    onDeleteClip = { clip: ClipModel -> clipListViewModel.deleteClip(clip) },
+                    onRefreshList = { clipListViewModel.getClips() }
                 )
+            }
+            if (isError) {
+                ShowError(headline = error.message!! + " error...",
+                    subtitle = error.toString(),
+                    onClick = { clipListViewModel.getClips() })
             }
         }
     }
@@ -88,7 +101,8 @@ fun PreviewClipListScreen(modifier: Modifier = Modifier,
                 ClipCardList(
                     clips = clips,
                     onDeleteClip = {},
-                    onClickClipDetails = { }
+                    onClickClipDetails = {},
+                    onRefreshList = {}
                 )
         }
     }

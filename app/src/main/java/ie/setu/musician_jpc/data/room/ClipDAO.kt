@@ -4,8 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import androidx.room.Update
-import ie.setu.musician_jpc.data.ClipModel
+import ie.setu.musician_jpc.data.model.ClipModel
 import kotlinx.coroutines.flow.Flow
 
 @Dao

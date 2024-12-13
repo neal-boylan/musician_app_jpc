@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "619897285943",
+    "project_id": "musician-bdaac",
+    "storage_bucket": "musician-bdaac.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619897285943:android:d6f5920ec129e3f21a3eb2",
+        "android_client_info": {
+          "package_name": "ie.setu.musician_jpc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuzvpLzJI4e4Lr-pwnF84wqoX1fmftdAU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

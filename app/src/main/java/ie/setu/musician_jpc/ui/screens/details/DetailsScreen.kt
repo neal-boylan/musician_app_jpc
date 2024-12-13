@@ -38,6 +38,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import ie.setu.musician_jpc.ui.components.details.DetailsScreenText
 import ie.setu.musician_jpc.ui.components.details.ReadOnlyTextField
+import ie.setu.musician_jpc.ui.components.general.ShowLoader
+import java.util.Date
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -52,6 +54,12 @@ fun DetailsScreen(
     var onDescriptionChanged by rememberSaveable { mutableStateOf(false) }
     var isEmptyError by rememberSaveable { mutableStateOf(false) }
     var isShortError by rememberSaveable { mutableStateOf(false) }
+    val context = LocalContext.current
+    val isError = detailViewModel.isErr.value
+    val error = detailViewModel.error.value
+    val isLoading = detailViewModel.isLoading.value
+
+    if(isLoading) ShowLoader("Retrieving Clip Details...")
 
     fun validate(text: String) {
         isEmptyError = text.isEmpty()
@@ -59,91 +67,96 @@ fun DetailsScreen(
         onDescriptionChanged = !(isEmptyError || isShortError)
     }
 
-    Column(modifier = modifier.padding(
-        start = 24.dp,
-        end = 24.dp,
-    ),
-        verticalArrangement = Arrangement.spacedBy(10.dp),
-    ) {
-        DetailsScreenText()
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxSize().padding(
-                start = 10.dp,
-                end = 10.dp,
-            ),
-        )
-        {
-            //Payment Type Field
-            ReadOnlyTextField(value = clip.mediaType,
-                label = "Media Type")
-            //Payment Amount Field
-            ReadOnlyTextField(value = clip.instrument,
-                label = "Instrument")
-            //Date Donated Field
-            ReadOnlyTextField(value = clip.dateAdded.toString(),
-                label = "Date Added")
-            //Description Field
-            text = clip.description
-            OutlinedTextField(modifier = Modifier.fillMaxWidth(),
-                value = text,
-                onValueChange = {
-                    text = it
-                    validate(text)
-                    clip.description = text
-                },
-                maxLines = 2,
-                label = { Text(text = "Description") },
-                isError = isEmptyError || isShortError,
-                supportingText = {
-                    if (isEmptyError) {
+    if(isError)
+        Toast.makeText(context,"Unable to fetch Details at this Time...",
+            Toast.LENGTH_SHORT).show()
+    if(!isError && !isLoading)
+        Column(modifier = modifier.padding(
+            start = 24.dp,
+            end = 24.dp,
+        ),
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+            ) {
+                DetailsScreenText()
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.fillMaxSize().padding(
+                        start = 10.dp,
+                        end = 10.dp,
+                    ),
+                )
+                {
+                    //Payment Type Field
+                    ReadOnlyTextField(value = clip.mediaType,
+                        label = "Media Type")
+                    //Payment Amount Field
+                    ReadOnlyTextField(value = clip.instrument,
+                        label = "Instrument")
+                    //Date Donated Field
+                    ReadOnlyTextField(value = clip.dateAdded.toString(),
+                        label = "Date Added")
+                    //Description Field
+                    text = clip.description
+                    OutlinedTextField(modifier = Modifier.fillMaxWidth(),
+                        value = text,
+                        onValueChange = {
+                            text = it
+                            validate(text)
+                            clip.description = text
+                        },
+                        maxLines = 2,
+                        label = { Text(text = "Description") },
+                        isError = isEmptyError || isShortError,
+                        supportingText = {
+                            if (isEmptyError) {
+                                Text(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    text = errorEmptyDescription,
+                                    color = MaterialTheme.colorScheme.error
+                                )
+                            }
+                            else
+                                if (isShortError) {
+                                    Text(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        text = errorShortDescription,
+                                        color = MaterialTheme.colorScheme.error
+                                    )
+                                }
+                        },
+                        trailingIcon = {
+                            if (isEmptyError || isShortError)
+                                Icon(Icons.Filled.Warning,"error", tint = MaterialTheme.colorScheme.error)
+                            else
+                                Icon(
+                                    Icons.Default.Edit, contentDescription = "add/edit",
+                                    tint = Color.Black
+                                )
+                        },
+                        keyboardActions = KeyboardActions { validate(text) },
+                        colors = OutlinedTextFieldDefaults.colors(
+                            unfocusedBorderColor = MaterialTheme.colorScheme.secondary,
+                        )
+                    )
+                    //End of Description Field
+                    Spacer(modifier.height(height = 48.dp))
+                    Button(
+                        onClick = {
+                            detailViewModel.updateClip(clip)
+                            onDescriptionChanged = false
+                        },
+                        elevation = ButtonDefaults.buttonElevation(20.dp),
+                        enabled = onDescriptionChanged
+                    ){
+                        Icon(Icons.Default.Save, contentDescription = "Save")
+                        Spacer(modifier.width(width = 8.dp))
                         Text(
-                            modifier = Modifier.fillMaxWidth(),
-                            text = errorEmptyDescription,
-                            color = MaterialTheme.colorScheme.error
+                            text = "Save",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 20.sp,
+                            color = Color.White
                         )
                     }
-                    else
-                        if (isShortError) {
-                            Text(
-                                modifier = Modifier.fillMaxWidth(),
-                                text = errorShortDescription,
-                                color = MaterialTheme.colorScheme.error
-                            )
-                        }
-                },
-                trailingIcon = {
-                    if (isEmptyError || isShortError)
-                        Icon(Icons.Filled.Warning,"error", tint = MaterialTheme.colorScheme.error)
-                    else
-                        Icon(
-                            Icons.Default.Edit, contentDescription = "add/edit",
-                            tint = Color.Black
-                        )
-                },
-                keyboardActions = KeyboardActions { validate(text) },
-                colors = OutlinedTextFieldDefaults.colors(
-                    unfocusedBorderColor = MaterialTheme.colorScheme.secondary,
-                )
-            )
-            //End of Description Field
-            Spacer(modifier.height(height = 48.dp))
-            Button(
-                onClick = {detailViewModel.updateClip(clip)
-                    onDescriptionChanged = false
-                },
-                elevation = ButtonDefaults.buttonElevation(20.dp),
-                enabled = onDescriptionChanged
-            ){
-                Icon(Icons.Default.Save, contentDescription = "Save")
-                Spacer(modifier.width(width = 8.dp))
-                Text(
-                    text = "Save",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp,
-                    color = Color.White
-                )
+                }
             }
-        }
-    }
 }

@@ -5,29 +5,50 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import ie.setu.musician_jpc.data.ClipModel
-import ie.setu.musician_jpc.data.repository.RoomRepository
+import ie.setu.musician_jpc.data.model.ClipModel
+import ie.setu.musician_jpc.data.api.RetrofitRepository
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class DetailsViewModel @Inject
-constructor(private val repository: RoomRepository,
+constructor(private val repository: RetrofitRepository,
             savedStateHandle: SavedStateHandle
             ) : ViewModel() {
 
     var clip = mutableStateOf(ClipModel())
-    val id: Int = checkNotNull(savedStateHandle["id"])
+    val id: String = checkNotNull(savedStateHandle["id"])
+    var isErr = mutableStateOf(false)
+    var error = mutableStateOf(Exception())
+    var isLoading = mutableStateOf(false)
 
     init {
         viewModelScope.launch {
-            repository.get(id).collect { objDonation ->
-                clip.value = objDonation
+            try {
+                isLoading.value = true
+                clip.value = repository.get(id)[0]
+                isErr.value = false
+                isLoading.value = false
+            } catch (e: Exception) {
+                isErr.value = true
+                error.value = e
+                isLoading.value = false
             }
         }
     }
 
     fun updateClip(clip: ClipModel) {
-        viewModelScope.launch { repository.update(clip) }
+        viewModelScope.launch {
+            try {
+                isLoading.value = true
+                repository.update(clip)
+                isErr.value = false
+                isLoading.value = false
+            } catch (e: Exception) {
+                isErr.value = true
+                error.value = e
+                isLoading.value = false
+            }
+        }
     }
 }

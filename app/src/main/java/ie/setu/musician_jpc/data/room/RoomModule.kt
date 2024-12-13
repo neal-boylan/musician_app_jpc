@@ -1,4 +1,4 @@
-package ie.setu.musician_jpc.data.repository
+package ie.setu.musician_jpc.data.room
 
 import android.content.Context
 import androidx.room.Room
@@ -7,8 +7,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import ie.setu.musician_jpc.data.room.AppDatabase
-import ie.setu.musician_jpc.data.room.ClipDAO
 import javax.inject.Singleton
 
 @Module

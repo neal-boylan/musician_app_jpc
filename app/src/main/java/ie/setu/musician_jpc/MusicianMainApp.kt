@@ -1,6 +1,8 @@
-package ie.setu.musician_jpc.main
+package ie.setu.musician_jpc
 
 import android.app.Application
+import com.google.firebase.Firebase
+import com.google.firebase.initialize
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
@@ -10,5 +12,6 @@ class MusicianMainApp : Application() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
         Timber.i("Starting Musician Application")
+        Firebase.initialize(context = this)
     }
 }

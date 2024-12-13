@@ -1,7 +1,6 @@
-package ie.setu.musician_jpc.data.repository
+package ie.setu.musician_jpc.data.room
 
-import ie.setu.musician_jpc.data.ClipModel
-import ie.setu.musician_jpc.data.room.ClipDAO
+import ie.setu.musician_jpc.data.model.ClipModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

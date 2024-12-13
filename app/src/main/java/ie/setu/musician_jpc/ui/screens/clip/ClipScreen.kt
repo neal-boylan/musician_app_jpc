@@ -20,8 +20,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import ie.setu.musician_jpc.data.ClipModel
-import ie.setu.musician_jpc.data.fakeClips
+import ie.setu.musician_jpc.data.model.ClipModel
+import ie.setu.musician_jpc.data.model.fakeClips
 import ie.setu.musician_jpc.ui.components.addClip.AddClipButton
 import ie.setu.musician_jpc.ui.components.addClip.ChipGroupString
 import ie.setu.musician_jpc.ui.components.addClip.InstrumentPicker

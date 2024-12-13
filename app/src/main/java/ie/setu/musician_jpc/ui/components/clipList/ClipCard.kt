@@ -49,8 +49,10 @@ fun ClipCard(
     instrument: String,
     genres: List<String>,
     dateAdded: String,
+    dateModified: String,
     onClickDelete: () -> Unit,
-    onClickClipDetails: () -> Unit
+    onClickClipDetails: () -> Unit,
+    onRefreshList: () -> Unit
 ) {
     Card(
         colors = CardDefaults.cardColors(
@@ -65,8 +67,10 @@ fun ClipCard(
             instrument,
             genres,
             dateAdded,
+            dateModified,
             onClickDelete,
-            onClickClipDetails)
+            onClickClipDetails,
+            onRefreshList)
     }
 }
 
@@ -78,8 +82,10 @@ private fun ClipCardContent(
     instrument: String,
     genres: List<String>,
     dateAdded: String,
+    dateModified: String,
     onClickDelete: () -> Unit,
-    onClickClipDetails: () -> Unit
+    onClickClipDetails: () -> Unit,
+    onRefreshList: () -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
     var showDeleteConfirmDialog by remember { mutableStateOf(false) }
@@ -129,7 +135,10 @@ private fun ClipCardContent(
             )
 
             Text(
-                text = "Clip added on $dateAdded", style = MaterialTheme.typography.labelSmall
+                text = "Added on $dateAdded", style = MaterialTheme.typography.labelSmall
+            )
+            Text(
+                text = "Modified on $dateModified", style = MaterialTheme.typography.labelSmall
             )
 
             ChipGroupString(genres = genres)
@@ -148,7 +157,8 @@ private fun ClipCardContent(
                     if (showDeleteConfirmDialog) {
                         showDeleteAlert(
                             onDismiss = { showDeleteConfirmDialog = false },
-                            onDelete = onClickDelete
+                            onDelete = onClickDelete,
+                            onRefresh = onRefreshList
                         )
                     }
                 }
@@ -170,14 +180,19 @@ private fun ClipCardContent(
 @Composable
 fun showDeleteAlert(
     onDismiss: () -> Unit,
-    onDelete: () -> Unit) {
+    onDelete: () -> Unit,
+    onRefresh: () -> Unit
+) {
     AlertDialog(
         onDismissRequest = onDismiss ,
         title = { Text(stringResource(id = R.string.confirm_delete)) },
         text = { Text(stringResource(id = R.string.confirm_delete_message)) },
         confirmButton = {
             Button(
-                onClick = { onDelete() }
+                onClick = {
+                    onDelete()
+                    onRefresh()
+                }
             ) { Text("Yes") }
         },
         dismissButton = {
@@ -197,8 +212,10 @@ fun DonationCardPreview() {
             instrument = "Guitar",
             genres = listOf("Rock", "Pop"),
             dateAdded = DateFormat.getDateTimeInstance().format(Date()),
-            onClickDelete = {  },
-            onClickClipDetails = {  }
+            dateModified = DateFormat.getDateTimeInstance().format(Date()),
+            onClickDelete = { },
+            onClickClipDetails = { },
+            onRefreshList = { }
         )
     }
 }
