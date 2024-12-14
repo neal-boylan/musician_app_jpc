@@ -1,4 +1,4 @@
-#Sat Dec 14 16:15:51 GMT 2024
+#Sat Dec 14 16:39:16 GMT 2024
 base.0=C\:\\Users\\nealb\\AndroidStudioProjects\\musicianX_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=C\:\\Users\\nealb\\AndroidStudioProjects\\musicianX_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
 base.10=C\:\\Users\\nealb\\AndroidStudioProjects\\musicianX_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\6\\classes.dex
