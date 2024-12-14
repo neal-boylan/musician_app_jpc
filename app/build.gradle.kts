@@ -15,7 +15,7 @@ android {
     defaultConfig {
         applicationId = "ie.setu.musician_jpc"
         minSdk = 30
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -90,6 +90,11 @@ dependencies {
 
     //Firebase
     implementation(libs.firebase.auth.ktx)
+
+    implementation(libs.googleid)
+
+    //Coil
+    implementation(libs.coil.compose)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
