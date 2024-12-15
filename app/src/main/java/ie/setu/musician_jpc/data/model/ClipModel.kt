@@ -15,7 +15,8 @@ data class ClipModel(
     val genres: List<String> = arrayListOf(),
     val dateAdded: Date = Date(),
     val dateModified: Date = Date(),
-    var email: String = "joe@bloggs.com"
+    var email: String = "joe@bloggs.com",
+    var imageUri: String = ""
 )
 
 val fakeClips = List(30) { i ->
