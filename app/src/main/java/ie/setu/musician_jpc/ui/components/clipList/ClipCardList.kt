@@ -1,5 +1,6 @@
 package ie.setu.musician_jpc.ui.components.clipList
 
+import android.net.Uri
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
@@ -33,7 +34,8 @@ internal fun ClipCardList(
                 dateAdded = DateFormat.getDateTimeInstance().format(clip.dateAdded),
                 dateModified = DateFormat.getDateTimeInstance().format(clip.dateModified),
                 onClickDelete = { onDeleteClip(clip) },
-                onClickClipDetails = { onClickClipDetails(clip._id) }
+                onClickClipDetails = { onClickClipDetails(clip._id) },
+                photoUri = Uri.parse(clip.imageUri)
             )
         }
     }

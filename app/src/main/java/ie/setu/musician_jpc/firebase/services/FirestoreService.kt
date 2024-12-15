@@ -1,5 +1,6 @@
 package ie.setu.musician_jpc.firebase.services
 
+import android.net.Uri
 import ie.setu.musician_jpc.data.model.ClipModel
 import kotlinx.coroutines.flow.Flow
 
@@ -13,4 +14,5 @@ interface FirestoreService {
     suspend fun insert(email: String, clip: Clip)
     suspend fun update(email: String, clip: Clip)
     suspend fun delete(email: String, clipId: String)
+    suspend fun updatePhotoUris(email: String, uri: Uri)
 }

@@ -1,5 +1,6 @@
 package ie.setu.musician_jpc.firebase.database
 
+import android.net.Uri
 import ie.setu.musician_jpc.firebase.services.Clip
 import ie.setu.musician_jpc.firebase.services.Clips
 import ie.setu.musician_jpc.firebase.services.FirestoreService
@@ -12,6 +13,7 @@ import kotlinx.coroutines.tasks.await
 import java.util.Date
 import javax.inject.Inject
 import com.google.firebase.firestore.toObject
+import timber.log.Timber
 
 class FirestoreRepository
 @Inject constructor(private val auth: AuthService,
@@ -31,14 +33,16 @@ class FirestoreRepository
             .document(clipId).get().await().toObject()
     }
 
-    override suspend fun insert(email: String,
-                                clip: Clip
-    )
+    override suspend fun insert(email: String, clip: Clip)
     {
-        val clipWithEmail = clip.copy(email = email)
+        val clipWithEmailAndImage =
+            clip.copy(
+                email = email,
+                imageUri = auth.customPhotoUri!!.toString()
+            )
 
         firestore.collection(CLIP_COLLECTION)
-            .add(clipWithEmail)
+            .add(clipWithEmailAndImage)
             .await()
 
     }
@@ -61,5 +65,23 @@ class FirestoreRepository
         firestore.collection(CLIP_COLLECTION)
             .document(clipId)
             .delete().await()
+    }
+
+    override suspend fun updatePhotoUris(email: String, uri: Uri) {
+
+        firestore.collection(CLIP_COLLECTION)
+            .whereEqualTo(USER_EMAIL, email)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    Timber.i("FSR Updating ID ${document.id}")
+                    firestore.collection(CLIP_COLLECTION)
+                        .document(document.id)
+                        .update("imageUri", uri.toString())
+                }
+            }
+            .addOnFailureListener { exception ->
+                Timber.i("Error $exception")
+            }
     }
 }
