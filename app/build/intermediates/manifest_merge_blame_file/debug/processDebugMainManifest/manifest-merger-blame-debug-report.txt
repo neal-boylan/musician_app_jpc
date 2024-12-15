@@ -9,8 +9,8 @@
 9        android:targetSdkVersion="35" />
 10
 11    <uses-permission android:name="android.permission.INTERNET" />
-11-->C:\Users\nealb\AndroidStudioProjects\musicianX_app_jpc\app\src\main\AndroidManifest.xml:5:5-66
-11-->C:\Users\nealb\AndroidStudioProjects\musicianX_app_jpc\app\src\main\AndroidManifest.xml:5:22-64
+11-->C:\SETU\musician_app_jpc\app\src\main\AndroidManifest.xml:5:5-66
+11-->C:\SETU\musician_app_jpc\app\src\main\AndroidManifest.xml:5:22-64
 12    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 12-->[com.google.firebase:firebase-auth:23.1.0] C:\Users\nealb\.gradle\caches\8.9\transforms\7dca4cac979e761f378b8aacc2909f3f\transformed\firebase-auth-23.1.0\AndroidManifest.xml:26:5-79
 12-->[com.google.firebase:firebase-auth:23.1.0] C:\Users\nealb\.gradle\caches\8.9\transforms\7dca4cac979e761f378b8aacc2909f3f\transformed\firebase-auth-23.1.0\AndroidManifest.xml:26:22-76
@@ -30,49 +30,49 @@
 19-->[androidx.core:core:1.15.0] C:\Users\nealb\.gradle\caches\8.9\transforms\5ecaa2abf11de9e1b4db4c71ab8dac9f\transformed\core-1.15.0\AndroidManifest.xml:26:22-94
 20
 21    <application
-21-->C:\Users\nealb\AndroidStudioProjects\musicianX_app_jpc\app\src\main\AndroidManifest.xml:7:5-29:19
+21-->C:\SETU\musician_app_jpc\app\src\main\AndroidManifest.xml:7:5-29:19
 22        android:name="ie.setu.musician_jpc.MusicianMainApp"
-22-->C:\Users\nealb\AndroidStudioProjects\musicianX_app_jpc\app\src\main\AndroidManifest.xml:8:9-60
+22-->C:\SETU\musician_app_jpc\app\src\main\AndroidManifest.xml:8:9-60
 23        android:allowBackup="true"
-23-->C:\Users\nealb\AndroidStudioProjects\musicianX_app_jpc\app\src\main\AndroidManifest.xml:9:9-35
+23-->C:\SETU\musician_app_jpc\app\src\main\AndroidManifest.xml:9:9-35
 24        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 24-->[androidx.core:core:1.15.0] C:\Users\nealb\.gradle\caches\8.9\transforms\5ecaa2abf11de9e1b4db4c71ab8dac9f\transformed\core-1.15.0\AndroidManifest.xml:28:18-86
 25        android:dataExtractionRules="@xml/data_extraction_rules"
-25-->C:\Users\nealb\AndroidStudioProjects\musicianX_app_jpc\app\src\main\AndroidManifest.xml:10:9-65
+25-->C:\SETU\musician_app_jpc\app\src\main\AndroidManifest.xml:10:9-65
 26        android:debuggable="true"
 27        android:extractNativeLibs="false"
 28        android:fullBackupContent="@xml/backup_rules"
-28-->C:\Users\nealb\AndroidStudioProjects\musicianX_app_jpc\app\src\main\AndroidManifest.xml:11:9-54
+28-->C:\SETU\musician_app_jpc\app\src\main\AndroidManifest.xml:11:9-54
 29        android:icon="@mipmap/ic_launcher"
-29-->C:\Users\nealb\AndroidStudioProjects\musicianX_app_jpc\app\src\main\AndroidManifest.xml:12:9-43
+29-->C:\SETU\musician_app_jpc\app\src\main\AndroidManifest.xml:12:9-43
 30        android:label="@string/app_name"
-30-->C:\Users\nealb\AndroidStudioProjects\musicianX_app_jpc\app\src\main\AndroidManifest.xml:13:9-41
+30-->C:\SETU\musician_app_jpc\app\src\main\AndroidManifest.xml:13:9-41
 31        android:roundIcon="@mipmap/ic_launcher_round"
-31-->C:\Users\nealb\AndroidStudioProjects\musicianX_app_jpc\app\src\main\AndroidManifest.xml:14:9-54
+31-->C:\SETU\musician_app_jpc\app\src\main\AndroidManifest.xml:14:9-54
 32        android:supportsRtl="true"
-32-->C:\Users\nealb\AndroidStudioProjects\musicianX_app_jpc\app\src\main\AndroidManifest.xml:15:9-35
+32-->C:\SETU\musician_app_jpc\app\src\main\AndroidManifest.xml:15:9-35
 33        android:testOnly="true"
 34        android:theme="@style/Theme.Musician_jpc" >
-34-->C:\Users\nealb\AndroidStudioProjects\musicianX_app_jpc\app\src\main\AndroidManifest.xml:16:9-50
+34-->C:\SETU\musician_app_jpc\app\src\main\AndroidManifest.xml:16:9-50
 35        <activity
-35-->C:\Users\nealb\AndroidStudioProjects\musicianX_app_jpc\app\src\main\AndroidManifest.xml:18:9-28:20
+35-->C:\SETU\musician_app_jpc\app\src\main\AndroidManifest.xml:18:9-28:20
 36            android:name="ie.setu.musician_jpc.MusicianMainActivity"
-36-->C:\Users\nealb\AndroidStudioProjects\musicianX_app_jpc\app\src\main\AndroidManifest.xml:19:13-49
+36-->C:\SETU\musician_app_jpc\app\src\main\AndroidManifest.xml:19:13-49
 37            android:exported="true"
-37-->C:\Users\nealb\AndroidStudioProjects\musicianX_app_jpc\app\src\main\AndroidManifest.xml:20:13-36
+37-->C:\SETU\musician_app_jpc\app\src\main\AndroidManifest.xml:20:13-36
 38            android:label="@string/app_name"
-38-->C:\Users\nealb\AndroidStudioProjects\musicianX_app_jpc\app\src\main\AndroidManifest.xml:21:13-45
+38-->C:\SETU\musician_app_jpc\app\src\main\AndroidManifest.xml:21:13-45
 39            android:theme="@style/Theme.Musician_jpc" >
-39-->C:\Users\nealb\AndroidStudioProjects\musicianX_app_jpc\app\src\main\AndroidManifest.xml:22:13-54
+39-->C:\SETU\musician_app_jpc\app\src\main\AndroidManifest.xml:22:13-54
 40            <intent-filter>
-40-->C:\Users\nealb\AndroidStudioProjects\musicianX_app_jpc\app\src\main\AndroidManifest.xml:23:13-27:29
+40-->C:\SETU\musician_app_jpc\app\src\main\AndroidManifest.xml:23:13-27:29
 41                <action android:name="android.intent.action.MAIN" />
-41-->C:\Users\nealb\AndroidStudioProjects\musicianX_app_jpc\app\src\main\AndroidManifest.xml:24:17-69
-41-->C:\Users\nealb\AndroidStudioProjects\musicianX_app_jpc\app\src\main\AndroidManifest.xml:24:25-66
+41-->C:\SETU\musician_app_jpc\app\src\main\AndroidManifest.xml:24:17-69
+41-->C:\SETU\musician_app_jpc\app\src\main\AndroidManifest.xml:24:25-66
 42
 43                <category android:name="android.intent.category.LAUNCHER" />
-43-->C:\Users\nealb\AndroidStudioProjects\musicianX_app_jpc\app\src\main\AndroidManifest.xml:26:17-77
-43-->C:\Users\nealb\AndroidStudioProjects\musicianX_app_jpc\app\src\main\AndroidManifest.xml:26:27-74
+43-->C:\SETU\musician_app_jpc\app\src\main\AndroidManifest.xml:26:17-77
+43-->C:\SETU\musician_app_jpc\app\src\main\AndroidManifest.xml:26:27-74
 44            </intent-filter>
 45        </activity>
 46

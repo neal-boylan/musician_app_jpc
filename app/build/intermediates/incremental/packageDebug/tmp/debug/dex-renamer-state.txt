@@ -1,20 +1,20 @@
-#Sat Dec 14 16:39:16 GMT 2024
-base.0=C\:\\Users\\nealb\\AndroidStudioProjects\\musicianX_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
-base.1=C\:\\Users\\nealb\\AndroidStudioProjects\\musicianX_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
-base.10=C\:\\Users\\nealb\\AndroidStudioProjects\\musicianX_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\6\\classes.dex
-base.11=C\:\\Users\\nealb\\AndroidStudioProjects\\musicianX_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\7\\classes.dex
-base.12=C\:\\Users\\nealb\\AndroidStudioProjects\\musicianX_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\8\\classes.dex
-base.13=C\:\\Users\\nealb\\AndroidStudioProjects\\musicianX_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
-base.14=C\:\\Users\\nealb\\AndroidStudioProjects\\musicianX_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes3.dex
-base.15=C\:\\Users\\nealb\\AndroidStudioProjects\\musicianX_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes4.dex
-base.2=C\:\\Users\\nealb\\AndroidStudioProjects\\musicianX_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\10\\classes.dex
-base.3=C\:\\Users\\nealb\\AndroidStudioProjects\\musicianX_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\12\\classes.dex
-base.4=C\:\\Users\\nealb\\AndroidStudioProjects\\musicianX_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\14\\classes.dex
-base.5=C\:\\Users\\nealb\\AndroidStudioProjects\\musicianX_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\15\\classes.dex
-base.6=C\:\\Users\\nealb\\AndroidStudioProjects\\musicianX_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
-base.7=C\:\\Users\\nealb\\AndroidStudioProjects\\musicianX_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\3\\classes.dex
-base.8=C\:\\Users\\nealb\\AndroidStudioProjects\\musicianX_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\4\\classes.dex
-base.9=C\:\\Users\\nealb\\AndroidStudioProjects\\musicianX_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\5\\classes.dex
+#Sun Dec 15 10:34:13 GMT 2024
+base.0=C\:\\SETU\\musician_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+base.1=C\:\\SETU\\musician_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+base.10=C\:\\SETU\\musician_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\6\\classes.dex
+base.11=C\:\\SETU\\musician_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\7\\classes.dex
+base.12=C\:\\SETU\\musician_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\8\\classes.dex
+base.13=C\:\\SETU\\musician_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
+base.14=C\:\\SETU\\musician_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes3.dex
+base.15=C\:\\SETU\\musician_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes4.dex
+base.2=C\:\\SETU\\musician_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\10\\classes.dex
+base.3=C\:\\SETU\\musician_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\12\\classes.dex
+base.4=C\:\\SETU\\musician_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\14\\classes.dex
+base.5=C\:\\SETU\\musician_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\15\\classes.dex
+base.6=C\:\\SETU\\musician_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
+base.7=C\:\\SETU\\musician_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\3\\classes.dex
+base.8=C\:\\SETU\\musician_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\4\\classes.dex
+base.9=C\:\\SETU\\musician_app_jpc\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\5\\classes.dex
 path.0=classes.dex
 path.1=0/classes.dex
 path.10=6/classes.dex

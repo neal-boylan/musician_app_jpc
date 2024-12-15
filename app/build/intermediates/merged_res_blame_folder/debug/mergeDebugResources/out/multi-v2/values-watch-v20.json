@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "ie.setu.musician_jpc.app-mergeDebugResources-70:/values-watch-v20/values-watch-v20.xml",
+            "outputFile": "ie.setu.musician_jpc.app-mergeDebugResources-3:/values-watch-v20/values-watch-v20.xml",
             "map": [
                 {
                     "source": "C:\\Users\\nealb\\.gradle\\caches\\8.9\\transforms\\e0d7be14af3643dcc9ccdbfb10b9a94b\\transformed\\play-services-auth-21.2.0\\res\\values-watch-v20\\values.xml",

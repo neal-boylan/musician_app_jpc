@@ -414,19 +414,28 @@ public final class DaggerMusicianMainApp_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
+      static String ie_setu_musician_jpc_ui_screens_home_HomeViewModel = "ie.setu.musician_jpc.ui.screens.home.HomeViewModel";
+
+      static String ie_setu_musician_jpc_ui_screens_register_RegisterViewModel = "ie.setu.musician_jpc.ui.screens.register.RegisterViewModel";
+
+      static String ie_setu_musician_jpc_ui_screens_clipList_ClipListViewModel = "ie.setu.musician_jpc.ui.screens.clipList.ClipListViewModel";
+
       static String ie_setu_musician_jpc_ui_screens_profile_ProfileViewModel = "ie.setu.musician_jpc.ui.screens.profile.ProfileViewModel";
 
       static String ie_setu_musician_jpc_ui_screens_login_LoginViewModel = "ie.setu.musician_jpc.ui.screens.login.LoginViewModel";
 
-      static String ie_setu_musician_jpc_ui_screens_register_RegisterViewModel = "ie.setu.musician_jpc.ui.screens.register.RegisterViewModel";
+      static String ie_setu_musician_jpc_ui_screens_clip_ClipViewModel = "ie.setu.musician_jpc.ui.screens.clip.ClipViewModel";
 
       static String ie_setu_musician_jpc_ui_screens_details_DetailsViewModel = "ie.setu.musician_jpc.ui.screens.details.DetailsViewModel";
 
-      static String ie_setu_musician_jpc_ui_screens_home_HomeViewModel = "ie.setu.musician_jpc.ui.screens.home.HomeViewModel";
+      @KeepFieldType
+      HomeViewModel ie_setu_musician_jpc_ui_screens_home_HomeViewModel2;
 
-      static String ie_setu_musician_jpc_ui_screens_clip_ClipViewModel = "ie.setu.musician_jpc.ui.screens.clip.ClipViewModel";
+      @KeepFieldType
+      RegisterViewModel ie_setu_musician_jpc_ui_screens_register_RegisterViewModel2;
 
-      static String ie_setu_musician_jpc_ui_screens_clipList_ClipListViewModel = "ie.setu.musician_jpc.ui.screens.clipList.ClipListViewModel";
+      @KeepFieldType
+      ClipListViewModel ie_setu_musician_jpc_ui_screens_clipList_ClipListViewModel2;
 
       @KeepFieldType
       ProfileViewModel ie_setu_musician_jpc_ui_screens_profile_ProfileViewModel2;
@@ -435,19 +444,10 @@ public final class DaggerMusicianMainApp_HiltComponents_SingletonC {
       LoginViewModel ie_setu_musician_jpc_ui_screens_login_LoginViewModel2;
 
       @KeepFieldType
-      RegisterViewModel ie_setu_musician_jpc_ui_screens_register_RegisterViewModel2;
-
-      @KeepFieldType
-      DetailsViewModel ie_setu_musician_jpc_ui_screens_details_DetailsViewModel2;
-
-      @KeepFieldType
-      HomeViewModel ie_setu_musician_jpc_ui_screens_home_HomeViewModel2;
-
-      @KeepFieldType
       ClipViewModel ie_setu_musician_jpc_ui_screens_clip_ClipViewModel2;
 
       @KeepFieldType
-      ClipListViewModel ie_setu_musician_jpc_ui_screens_clipList_ClipListViewModel2;
+      DetailsViewModel ie_setu_musician_jpc_ui_screens_details_DetailsViewModel2;
     }
   }
 
@@ -508,40 +508,40 @@ public final class DaggerMusicianMainApp_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
-      static String ie_setu_musician_jpc_ui_screens_profile_ProfileViewModel = "ie.setu.musician_jpc.ui.screens.profile.ProfileViewModel";
-
       static String ie_setu_musician_jpc_ui_screens_home_HomeViewModel = "ie.setu.musician_jpc.ui.screens.home.HomeViewModel";
-
-      static String ie_setu_musician_jpc_ui_screens_clipList_ClipListViewModel = "ie.setu.musician_jpc.ui.screens.clipList.ClipListViewModel";
-
-      static String ie_setu_musician_jpc_ui_screens_clip_ClipViewModel = "ie.setu.musician_jpc.ui.screens.clip.ClipViewModel";
-
-      static String ie_setu_musician_jpc_ui_screens_register_RegisterViewModel = "ie.setu.musician_jpc.ui.screens.register.RegisterViewModel";
 
       static String ie_setu_musician_jpc_ui_screens_details_DetailsViewModel = "ie.setu.musician_jpc.ui.screens.details.DetailsViewModel";
 
+      static String ie_setu_musician_jpc_ui_screens_profile_ProfileViewModel = "ie.setu.musician_jpc.ui.screens.profile.ProfileViewModel";
+
+      static String ie_setu_musician_jpc_ui_screens_clipList_ClipListViewModel = "ie.setu.musician_jpc.ui.screens.clipList.ClipListViewModel";
+
+      static String ie_setu_musician_jpc_ui_screens_register_RegisterViewModel = "ie.setu.musician_jpc.ui.screens.register.RegisterViewModel";
+
       static String ie_setu_musician_jpc_ui_screens_login_LoginViewModel = "ie.setu.musician_jpc.ui.screens.login.LoginViewModel";
 
-      @KeepFieldType
-      ProfileViewModel ie_setu_musician_jpc_ui_screens_profile_ProfileViewModel2;
+      static String ie_setu_musician_jpc_ui_screens_clip_ClipViewModel = "ie.setu.musician_jpc.ui.screens.clip.ClipViewModel";
 
       @KeepFieldType
       HomeViewModel ie_setu_musician_jpc_ui_screens_home_HomeViewModel2;
 
       @KeepFieldType
-      ClipListViewModel ie_setu_musician_jpc_ui_screens_clipList_ClipListViewModel2;
+      DetailsViewModel ie_setu_musician_jpc_ui_screens_details_DetailsViewModel2;
 
       @KeepFieldType
-      ClipViewModel ie_setu_musician_jpc_ui_screens_clip_ClipViewModel2;
+      ProfileViewModel ie_setu_musician_jpc_ui_screens_profile_ProfileViewModel2;
+
+      @KeepFieldType
+      ClipListViewModel ie_setu_musician_jpc_ui_screens_clipList_ClipListViewModel2;
 
       @KeepFieldType
       RegisterViewModel ie_setu_musician_jpc_ui_screens_register_RegisterViewModel2;
 
       @KeepFieldType
-      DetailsViewModel ie_setu_musician_jpc_ui_screens_details_DetailsViewModel2;
+      LoginViewModel ie_setu_musician_jpc_ui_screens_login_LoginViewModel2;
 
       @KeepFieldType
-      LoginViewModel ie_setu_musician_jpc_ui_screens_login_LoginViewModel2;
+      ClipViewModel ie_setu_musician_jpc_ui_screens_clip_ClipViewModel2;
     }
 
     private static final class SwitchingProvider<T> implements Provider<T> {

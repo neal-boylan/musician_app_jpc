@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "ie.setu.musician_jpc.app-mergeDebugResources-70:/values-am/values-am.xml",
+            "outputFile": "ie.setu.musician_jpc.app-mergeDebugResources-3:/values-am/values-am.xml",
             "map": [
                 {
                     "source": "C:\\Users\\nealb\\.gradle\\caches\\8.9\\transforms\\fed8a480468596cc8ea41d9c9bbaa766\\transformed\\browser-1.4.0\\res\\values-am\\values-am.xml",
