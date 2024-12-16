@@ -106,4 +106,7 @@ dependencies {
     implementation ("androidx.media3:media3-exoplayer:1.2.1")
     implementation ("androidx.media3:media3-ui:1.2.1")
     implementation ("androidx.media3:media3-common:1.2.1")
+
+    //SplashScreen
+    implementation("androidx.core:core-splashscreen:1.0.1")
 }
