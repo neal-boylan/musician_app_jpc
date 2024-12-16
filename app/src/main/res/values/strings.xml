@@ -15,6 +15,7 @@
     <string name="defaultMessage">Go Homer!</string>
     <string name="add_title">Add Title</string>
     <string name="add_description">Add Description</string>
+    <string name="add_youTubeURL">Add YouTube URL</string>
     <string name="show_less">Show Less</string>
     <string name="show_more">Show More</string>
     <string name="empty_list">No Clips Yet - Go make some music!</string>

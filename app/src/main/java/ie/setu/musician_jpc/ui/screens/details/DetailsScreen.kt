@@ -36,8 +36,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import ie.setu.musician_jpc.ui.components.details.DetailsScreenText
 import ie.setu.musician_jpc.ui.components.details.ReadOnlyTextField
+import ie.setu.musician_jpc.ui.components.details.YouTubePlayer
 import ie.setu.musician_jpc.ui.components.general.ShowLoader
 import java.util.Date
 
@@ -58,6 +60,8 @@ fun DetailsScreen(
     val isError = detailViewModel.isErr.value
     val error = detailViewModel.error.value
     val isLoading = detailViewModel.isLoading.value
+//    val videoUri = Uri.parse("android.resource://com.mkrdeveloper.videoplayercompose/raw/sample")
+//    val videoUrl = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
 
     if(isLoading) ShowLoader("Retrieving Clip Details...")
 
@@ -86,6 +90,14 @@ fun DetailsScreen(
                     ),
                 )
                 {
+                    YouTubePlayer(
+                        youtubeVideoId = clip.youTubeURL,//"kShAS6aafOU",
+                        lifecycleOwner = LocalLifecycleOwner.current
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    //VideoPlayer(videoUri =videoUri)
+                    // VideoPlayerExo(videoUrl =videoUrl)
+
                     //Payment Type Field
                     ReadOnlyTextField(value = clip.mediaType,
                         label = "Media Type")

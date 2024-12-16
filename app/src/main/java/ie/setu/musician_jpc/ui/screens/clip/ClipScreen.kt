@@ -29,6 +29,7 @@ import ie.setu.musician_jpc.ui.components.addClip.DescriptionInput
 import ie.setu.musician_jpc.ui.components.addClip.RadioButtonGroup
 import ie.setu.musician_jpc.ui.components.addClip.TitleInput
 import ie.setu.musician_jpc.ui.components.addClip.WelcomeText
+import ie.setu.musician_jpc.ui.components.addClip.YouTubeURLInput
 import ie.setu.musician_jpc.ui.screens.clipList.ClipListViewModel
 import ie.setu.musician_jpc.ui.theme.Musician_jpcTheme
 
@@ -38,6 +39,7 @@ fun ClipScreen(modifier: Modifier = Modifier,
 ) {
     var clipTitle by remember { mutableStateOf("Sweet Child O Mine") }
     var clipDescription by remember { mutableStateOf("Go Homer!") }
+    var youTubeURL by remember { mutableStateOf("https://www.youtube.com/watch?v=zXyCAuVVKuM")  }
     var mediaType by remember { mutableStateOf("Video") }
     var instrument by remember { mutableStateOf("Guitar") }
     var totalClips by remember { mutableIntStateOf(0) }
@@ -52,7 +54,7 @@ fun ClipScreen(modifier: Modifier = Modifier,
                 start = 24.dp,
                 end = 24.dp
             ),
-            verticalArrangement = Arrangement.spacedBy(30.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
 
             WelcomeText()
@@ -66,6 +68,12 @@ fun ClipScreen(modifier: Modifier = Modifier,
                 modifier = modifier.padding(top = 8.dp,bottom = 8.dp),
                 onDescriptionChange = { clipDescription = it }
             )
+
+            YouTubeURLInput(
+                modifier = modifier.padding(top = 8.dp,bottom = 8.dp),
+                onDescriptionChange = { youTubeURL = it }
+            )
+
             Row(
                 verticalAlignment = Alignment.CenterVertically,
             )
@@ -109,6 +117,7 @@ fun ClipScreen(modifier: Modifier = Modifier,
                     mediaType = mediaType,
                     instrument = instrument,
                     genres = selectedGenre.value,
+                    youTubeURL = youTubeURL.substringAfterLast("=")
                     ),
                 onTotalClipsChange = { totalClips = it }
             )
