@@ -1,6 +1,8 @@
 package ie.setu.musician_jpc.firebase.database
 
 import android.net.Uri
+import androidx.browser.customtabs.CustomTabsClient.getPackageName
+import com.google.firebase.auth.UserProfileChangeRequest
 import ie.setu.musician_jpc.firebase.services.Clip
 import ie.setu.musician_jpc.firebase.services.Clips
 import ie.setu.musician_jpc.firebase.services.FirestoreService
@@ -13,12 +15,17 @@ import kotlinx.coroutines.tasks.await
 import java.util.Date
 import javax.inject.Inject
 import com.google.firebase.firestore.toObject
+import ie.setu.musician_jpc.R
+import ie.setu.musician_jpc.firebase.auth.Response
+import ie.setu.musician_jpc.firebase.services.StorageService
 import timber.log.Timber
 
 class FirestoreRepository
 @Inject constructor(private val auth: AuthService,
-                    private val firestore: FirebaseFirestore
+                    private val firestore: FirebaseFirestore,
+                    private val storageService: StorageService
 ) : FirestoreService {
+
 
     override suspend fun getAll(email: String): Clips {
 
@@ -35,10 +42,13 @@ class FirestoreRepository
 
     override suspend fun insert(email: String, clip: Clip)
     {
+        val uri = Uri.parse("android.resource://ie.setu.musician_jpc/" + R.raw.guitar)
+
         val clipWithEmailAndImage =
             clip.copy(
                 email = email,
-                imageUri = auth.customPhotoUri!!.toString()
+                imageUri = auth.customPhotoUri!!.toString(),
+                videoURI = uploadCustomVideoUri(uri).toString()
             )
 
         firestore.collection(CLIP_COLLECTION)
@@ -47,12 +57,14 @@ class FirestoreRepository
 
     }
 
-    override suspend fun update(email: String,
-                                clip: Clip
-    )
+    override suspend fun update(email: String, clip: Clip)
     {
+        val uri = Uri.parse("android.resource://ie.setu.musician_jpc/" + R.raw.guitar)
         val clipWithModifiedDate =
-            clip.copy(dateModified = Date())
+            clip.copy(
+                dateModified = Date(),
+                videoURI = uploadCustomVideoUri(uri).toString()
+            ) //uri.toString())
 
         firestore.collection(CLIP_COLLECTION)
             .document(clip._id)
@@ -84,4 +96,18 @@ class FirestoreRepository
                 Timber.i("Error $exception")
             }
     }
+
+    private suspend fun uploadCustomVideoUri(uri: Uri) : Uri {
+        if (uri.toString().isNotEmpty()) {
+            val urlTask = storageService.uploadFile(uri = uri, "videos")
+            val url = urlTask.addOnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Timber.e("task not successful: ${task.exception}")
+                }
+            }.await()
+            return url
+        }
+        return Uri.EMPTY
+    }
+
 }

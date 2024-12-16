@@ -1,10 +1,13 @@
 package ie.setu.musician_jpc.ui.screens.clip
 
+import android.net.Uri
+import androidx.compose.foundation.content.MediaType.Companion.Text
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
@@ -30,22 +33,26 @@ import ie.setu.musician_jpc.ui.components.addClip.RadioButtonGroup
 import ie.setu.musician_jpc.ui.components.addClip.TitleInput
 import ie.setu.musician_jpc.ui.components.addClip.WelcomeText
 import ie.setu.musician_jpc.ui.components.addClip.YouTubeURLInput
+import ie.setu.musician_jpc.ui.components.general.ShowPhotoPicker
+import ie.setu.musician_jpc.ui.components.general.ShowVideoPicker
 import ie.setu.musician_jpc.ui.screens.clipList.ClipListViewModel
 import ie.setu.musician_jpc.ui.theme.Musician_jpcTheme
 
 @Composable
 fun ClipScreen(modifier: Modifier = Modifier,
-               clipListViewModel: ClipListViewModel = hiltViewModel()
+               clipListViewModel: ClipListViewModel = hiltViewModel(),
+               clipViewModel: ClipViewModel = hiltViewModel()
 ) {
     var clipTitle by remember { mutableStateOf("Sweet Child O Mine") }
     var clipDescription by remember { mutableStateOf("Go Homer!") }
     var youTubeURL by remember { mutableStateOf("https://www.youtube.com/watch?v=zXyCAuVVKuM")  }
-    var mediaType by remember { mutableStateOf("Video") }
+    var mediaType by remember { mutableStateOf("YouTube") }
     var instrument by remember { mutableStateOf("Guitar") }
     var totalClips by remember { mutableIntStateOf(0) }
     val selectedGenre: MutableState<List<String>> = remember {mutableStateOf(listOf())}
     val possibleGenres = listOf("Rock", "Pop", "Jazz", "Blues", "Rap", "Metal", "Alternative", "Other")
     val clips = clipListViewModel.uiClips.collectAsState().value
+    var videoUri: Uri? by remember { mutableStateOf(Uri.EMPTY) }
 
     Column {
         Column(
@@ -68,11 +75,26 @@ fun ClipScreen(modifier: Modifier = Modifier,
                 modifier = modifier.padding(top = 8.dp,bottom = 8.dp),
                 onDescriptionChange = { clipDescription = it }
             )
-
-            YouTubeURLInput(
-                modifier = modifier.padding(top = 8.dp,bottom = 8.dp),
-                onDescriptionChange = { youTubeURL = it }
-            )
+            if(mediaType == "YouTube") {
+                YouTubeURLInput(
+                    modifier = modifier.padding(top = 8.dp, bottom = 8.dp),
+                    onDescriptionChange = { youTubeURL = it }
+                )
+            } else {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                )
+                {
+                    ShowVideoPicker(
+                        onVideoUriChanged = {
+                            videoUri = it
+                            // clipViewModel.updateVideoUri(videoUri!!)
+                        }
+                    )
+                    Spacer(modifier.weight(1f))
+                    Text(videoUri.toString())
+                }
+            }
 
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -117,7 +139,8 @@ fun ClipScreen(modifier: Modifier = Modifier,
                     mediaType = mediaType,
                     instrument = instrument,
                     genres = selectedGenre.value,
-                    youTubeURL = youTubeURL.substringAfterLast("=")
+                    youTubeURL = youTubeURL.substringAfterLast("="),
+                    videoURI = videoUri.toString()
                     ),
                 onTotalClipsChange = { totalClips = it }
             )

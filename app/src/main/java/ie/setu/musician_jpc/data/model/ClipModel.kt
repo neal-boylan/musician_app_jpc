@@ -1,5 +1,6 @@
 package ie.setu.musician_jpc.data.model
 
+import android.net.Uri
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.firebase.firestore.DocumentId
@@ -17,7 +18,8 @@ data class ClipModel(
     val dateModified: Date = Date(),
     var email: String = "joe@bloggs.com",
     var imageUri: String = "",
-    var youTubeURL: String = ""
+    var youTubeURL: String = "",
+    var videoURI: String = ""
 )
 
 val fakeClips = List(30) { i ->

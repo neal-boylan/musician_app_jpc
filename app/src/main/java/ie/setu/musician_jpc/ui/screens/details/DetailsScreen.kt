@@ -42,6 +42,11 @@ import ie.setu.musician_jpc.ui.components.details.ReadOnlyTextField
 import ie.setu.musician_jpc.ui.components.details.YouTubePlayer
 import ie.setu.musician_jpc.ui.components.general.ShowLoader
 import java.util.Date
+import java.io.File
+import android.content.Context
+import android.net.Uri
+import ie.setu.musician_jpc.ui.components.details.VideoPlayer
+import ie.setu.musician_jpc.ui.components.details.VideoPlayerExo
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -60,8 +65,8 @@ fun DetailsScreen(
     val isError = detailViewModel.isErr.value
     val error = detailViewModel.error.value
     val isLoading = detailViewModel.isLoading.value
-//    val videoUri = Uri.parse("android.resource://com.mkrdeveloper.videoplayercompose/raw/sample")
-//    val videoUrl = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+    val videoUri = Uri.parse("android.resource://com.mkrdeveloper.videoplayercompose/raw/sample")
+    val videoUrl = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
 
     if(isLoading) ShowLoader("Retrieving Clip Details...")
 
@@ -90,13 +95,16 @@ fun DetailsScreen(
                     ),
                 )
                 {
-                    YouTubePlayer(
-                        youtubeVideoId = clip.youTubeURL,//"kShAS6aafOU",
-                        lifecycleOwner = LocalLifecycleOwner.current
-                    )
+                    if(clip.mediaType == "YouTube"){
+                        YouTubePlayer(
+                            youtubeVideoId = clip.youTubeURL,//"kShAS6aafOU",
+                            lifecycleOwner = LocalLifecycleOwner.current
+                        )
+                    } else {
+                        VideoPlayer(videoUri = Uri.parse(clip.videoURI))
+                        //VideoPlayerExo(videoUrl =videoUrl)
+                    }
                     Spacer(modifier = Modifier.height(16.dp))
-                    //VideoPlayer(videoUri =videoUri)
-                    // VideoPlayerExo(videoUrl =videoUrl)
 
                     //Payment Type Field
                     ReadOnlyTextField(value = clip.mediaType,

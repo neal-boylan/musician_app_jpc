@@ -1,5 +1,6 @@
 package ie.setu.musician_jpc.ui.screens.clip
 
+import android.net.Uri
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,7 +15,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ClipViewModel @Inject
 constructor(private val repository: FirestoreService,
-            private val authService: AuthService
+            private val authService: AuthService,
+            private val firestoreService: FirestoreService
 ) : ViewModel() {
 
     var isErr = mutableStateOf(false)
@@ -35,4 +37,5 @@ constructor(private val repository: FirestoreService,
             }
             Timber.i("DVM Insert Message = : ${error.value.message} and isError ${isErr.value}")
         }
+
 }

@@ -41,10 +41,12 @@ object FirebaseModule {
     @Provides
     fun provideFirestoreRepository(
         auth: AuthService,
-        firebaseFirestore: FirebaseFirestore
+        firebaseFirestore: FirebaseFirestore,
+        storage: StorageService
     ) : FirestoreService = FirestoreRepository(
         auth = auth,
-        firestore = firebaseFirestore
+        firestore = firebaseFirestore,
+        storageService = storage
     )
 
     @Provides
