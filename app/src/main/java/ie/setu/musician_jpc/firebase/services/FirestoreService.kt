@@ -10,6 +10,7 @@ typealias Clips = Flow<List<Clip>>
 interface FirestoreService {
 
     suspend fun getAll(email: String) : Clips
+    suspend fun getAllClips() : Clips
     suspend fun get(email: String, clipId: String) : Clip?
     suspend fun insert(email: String, clip: Clip)
     suspend fun update(email: String, clip: Clip)

@@ -4,9 +4,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -19,6 +24,7 @@ import ie.setu.musician_jpc.R
 import ie.setu.musician_jpc.data.model.ClipModel
 import ie.setu.musician_jpc.ui.components.clipList.ClipCardList
 import ie.setu.musician_jpc.ui.components.clipList.ClipListText
+import ie.setu.musician_jpc.ui.components.clipList.ShowAllToggle
 import ie.setu.musician_jpc.ui.components.general.Centre
 import ie.setu.musician_jpc.ui.components.general.ShowError
 import ie.setu.musician_jpc.ui.components.general.ShowLoader
@@ -34,9 +40,13 @@ fun ClipListScreen(modifier: Modifier = Modifier,
     val isError = clipListViewModel.isErr.value
     val isLoading = clipListViewModel.isLoading.value
     val error = clipListViewModel.error.value
+    // var showAll by remember { mutableStateOf(false) }
+    var showAll = clipListViewModel.showAll.value
+    var checked by remember { mutableStateOf(false) }
 
     Timber.i("RS : Clips List = $clips")
-
+    Timber.i("checked = $checked")
+    Timber.i("clipListViewModel.showAll.value = ${clipListViewModel.showAll.value}")
     Column {
         Column(
             modifier = modifier.padding(
@@ -46,8 +56,20 @@ fun ClipListScreen(modifier: Modifier = Modifier,
         ) {
             if(isLoading) ShowLoader("Loading Clips...")
             ClipListText()
+
+
+            Switch(
+                checked = checked,
+                onCheckedChange = {
+                    checked = it
+                    clipListViewModel.showAll.value = it
+                    if(checked) clipListViewModel.getAllClips() else clipListViewModel.getClips()
+                }
+            )
 //            if(!isError)
 //                ShowRefreshList(onClick = { reportViewModel.getDonations() })
+
+
             if (clips.isEmpty() && !isError)
                 Centre(Modifier.fillMaxSize()) {
                     Text(

@@ -102,7 +102,7 @@ fun ClipScreen(modifier: Modifier = Modifier,
             {
                 RadioButtonGroup(
                     modifier = modifier,
-                    onPaymentTypeChange = { mediaType = it }
+                    onMediaTypeChange = { mediaType = it }
                 )
                 Spacer(modifier.weight(1f))
                 InstrumentPicker (
@@ -187,7 +187,7 @@ fun PreviewClipScreen(modifier: Modifier = Modifier,
             {
                 RadioButtonGroup(
                     modifier = modifier,
-                    onPaymentTypeChange = { mediaType = it }
+                    onMediaTypeChange = { mediaType = it }
                 )
                 Spacer(modifier.weight(1f))
                 InstrumentPicker (

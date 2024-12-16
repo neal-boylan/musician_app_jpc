@@ -1,6 +1,9 @@
 package ie.setu.musician_jpc.ui.screens.clipList
 
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,8 +27,12 @@ constructor(private val repository: FirestoreService,
     var isErr = mutableStateOf(false)
     var isLoading = mutableStateOf(false)
     var error = mutableStateOf(Exception())
+    var showAll = mutableStateOf(false)
 
-    init { getClips() }
+    init {
+        Timber.i("showAll.value = $showAll.value")
+        if (!showAll.value) getClips() else getAllClips()
+    }
 
     fun getClips() {
         viewModelScope.launch {
@@ -46,6 +53,27 @@ constructor(private val repository: FirestoreService,
             }
         }
     }
+
+    fun getAllClips() {
+        viewModelScope.launch {
+            try {
+                isLoading.value = true
+                repository.getAllClips().collect { items ->
+                    _clips.value = items
+                    isErr.value = false
+                    isLoading.value = false
+                }
+                Timber.i("DVM RVM = : ${_clips.value}")
+            }
+            catch(e:Exception) {
+                isErr.value = true
+                isLoading.value = false
+                error.value = e
+                Timber.i("RVM Error ${e.message}")
+            }
+        }
+    }
+
 
     fun deleteClip(clip: ClipModel)
     = viewModelScope.launch {

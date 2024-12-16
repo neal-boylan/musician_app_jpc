@@ -22,7 +22,7 @@ import ie.setu.musician_jpc.ui.theme.Musician_jpcTheme
 
 @Composable
 fun RadioButtonGroup(modifier: Modifier = Modifier,
-                     onPaymentTypeChange: (String) -> Unit) {
+                     onMediaTypeChange: (String) -> Unit) {
 
     val radioOptions = listOf(
         stringResource(R.string.video),
@@ -40,7 +40,7 @@ fun RadioButtonGroup(modifier: Modifier = Modifier,
                     selected = (paymentText == clipType),
                     onClick = {
                         clipType = paymentText
-                        onPaymentTypeChange(clipType)
+                        onMediaTypeChange(clipType)
                     }
                 )
                 Text(
@@ -60,7 +60,7 @@ fun RadioButtonPreview() {
     Musician_jpcTheme {
         RadioButtonGroup(
             Modifier,
-            onPaymentTypeChange = {}
+            onMediaTypeChange = {}
         )
     }
 }

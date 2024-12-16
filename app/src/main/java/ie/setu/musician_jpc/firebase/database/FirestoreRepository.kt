@@ -34,6 +34,12 @@ class FirestoreRepository
             .dataObjects()
     }
 
+    override suspend fun getAllClips(): Clips {
+
+        return firestore.collection(CLIP_COLLECTION)
+            .dataObjects()
+    }
+
     override suspend fun get(email: String,
                              clipId: String): Clip? {
         return firestore.collection(CLIP_COLLECTION)
