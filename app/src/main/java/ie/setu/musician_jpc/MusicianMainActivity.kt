@@ -37,27 +37,12 @@ class MusicianMainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
+            // dark theme source: https://www.youtube.com/watch?v=X8_w8Hqe0lA&t=186s
             var darkTheme by remember { mutableStateOf(true) }
             Musician_jpcTheme(darkTheme = darkTheme)
             {
                 HomeScreen(darkTheme = darkTheme, onThemeChange = { darkTheme = !darkTheme })
-                // ThemeSwitcher(darkTheme = darkTheme) { darkTheme = !darkTheme }
             }
         }
     }
-}
-
-@Composable
-fun ThemeSwitcher(darkTheme: Boolean, onThemeChange: () -> Unit) {
-    Switch(
-        checked = darkTheme,
-        onCheckedChange = { onThemeChange() },
-        colors = SwitchDefaults.colors(
-            checkedTrackColor = MaterialTheme.colorScheme.secondaryContainer,
-            checkedThumbColor = MaterialTheme.colorScheme.primary,
-            uncheckedTrackColor = MaterialTheme.colorScheme.secondaryContainer,
-            uncheckedThumbColor = MaterialTheme.colorScheme.primary
-        )
-    )
-
 }
