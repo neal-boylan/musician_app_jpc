@@ -160,10 +160,10 @@ fun HeadingLogoComponent() {
                 .fillMaxWidth()
         ) {
             Image(
-                painter = painterResource(id = R.drawable.login_homer),
-                contentDescription = "rose image",
+                painter = painterResource(id = R.drawable.musician_logo),
+                contentDescription = "musician logo",
                 modifier = Modifier
-                    .size(180.dp)
+                    .size(150.dp)
                     .clip(CircleShape),
                 contentScale = ContentScale.Crop
             )
@@ -358,7 +358,8 @@ fun ButtonComponent(value: String, onButtonClicked: () -> Unit, isEnabled: Boole
             onButtonClicked.invoke()
         },
         contentPadding = PaddingValues(),
-        colors = ButtonDefaults.buttonColors(Color.Transparent),
+        // colors = ButtonDefaults.buttonColors(Color.Transparent),
+        colors = ButtonDefaults.buttonColors(contentColor = Color.Black),
         shape = RoundedCornerShape(50.dp),
         enabled = isEnabled
     ) {
