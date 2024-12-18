@@ -31,8 +31,8 @@ fun BottomAppBarProvider(
     var navigationSelectedItem by remember { mutableIntStateOf(0) }
 
     NavigationBar(
-        containerColor = MaterialTheme.colorScheme.primary,
-        contentColor = MaterialTheme.colorScheme.onSecondary,
+        containerColor = MaterialTheme.colorScheme.primaryContainer,
+        contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
     ) {
         //getting the list of bottom navigation items
         userDestinations.forEachIndexed { index, navigationItem ->
@@ -41,9 +41,9 @@ fun BottomAppBarProvider(
                 selected = navigationItem == currentScreen,
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = MaterialTheme.colorScheme.secondary,
-                    selectedTextColor = White,
-                    unselectedIconColor = White,
-                    unselectedTextColor = Black
+                    selectedTextColor = MaterialTheme.colorScheme.onSecondary,
+                    unselectedIconColor = MaterialTheme.colorScheme.tertiary,
+                    unselectedTextColor = MaterialTheme.colorScheme.onTertiary
                 ),
                 label = { Text(text = navigationItem.label) },
                 icon = { Icon(navigationItem.icon, contentDescription = navigationItem.label) },

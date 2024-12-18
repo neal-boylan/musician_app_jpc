@@ -27,6 +27,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import ie.setu.musician_jpc.ui.theme.onPrimaryLight
+import ie.setu.musician_jpc.ui.theme.onSecondaryLight
+import ie.setu.musician_jpc.ui.theme.onTertiaryLight
+import ie.setu.musician_jpc.ui.theme.secondaryLight
+import ie.setu.musician_jpc.ui.theme.tertiaryLight
 import timber.log.Timber
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -71,7 +76,7 @@ fun ChipString(
     Surface(
         modifier = Modifier.padding(4.dp),
         shape = MaterialTheme.shapes.medium,
-        color = if (isSelected) Color.LightGray else Color.Black
+        color = if (isSelected) tertiaryLight else secondaryLight
     ) {
         Row(modifier = Modifier
             .toggleable(
@@ -84,7 +89,7 @@ fun ChipString(
             Text(
                 text = name,
                 style = MaterialTheme.typography.bodyMedium,
-                color = Color.White,
+                color = if (isSelected) onTertiaryLight else onSecondaryLight,
                 modifier = Modifier.padding(8.dp)
             )
         }

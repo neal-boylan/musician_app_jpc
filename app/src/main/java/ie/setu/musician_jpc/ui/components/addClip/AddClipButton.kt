@@ -33,6 +33,8 @@ import ie.setu.musician_jpc.data.model.fakeClips
 import ie.setu.musician_jpc.ui.screens.clip.ClipViewModel
 import ie.setu.musician_jpc.ui.screens.clipList.ClipListViewModel
 import ie.setu.musician_jpc.ui.theme.Musician_jpcTheme
+import ie.setu.musician_jpc.ui.theme.onPrimaryDark
+import ie.setu.musician_jpc.ui.theme.onPrimaryLight
 import timber.log.Timber
 
 @Composable
@@ -67,7 +69,7 @@ fun AddClipButton(
                 text = stringResource(R.string.addClipButton),
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
-                color = Color.White
+                color = onPrimaryLight
             )
         }
 
@@ -88,16 +90,15 @@ fun AddClipButton(
                     style = SpanStyle(
                         fontWeight = FontWeight.Bold,
                         fontSize = 20.sp,
-                        color = MaterialTheme.colorScheme.secondary)
+                        color = onPrimaryDark)
                 ) {
                     append(totalClips.toString())
                 }
             })
     }
     Timber.i("DVM Button = : ${error.message}")
-    //Required to refresh our 'totalDonated'
     if(isError)
-        Toast.makeText(context,"Unable to Donate at this Time...",
+        Toast.makeText(context,"Unable to Add Clip at this Time...",
             Toast.LENGTH_SHORT).show()
 }
 
@@ -117,11 +118,11 @@ fun PreviewAddClipButton(
                 onTotalClipsChange(totalClips)
                 Toast.makeText(context, "Clip Added", Toast.LENGTH_LONG).show()
                 Timber.i("Clip info : $clip")
-                Timber.i("Donation List info : ${clips.toList()}")
+                Timber.i("Clip List info : ${clips.toList()}")
             },
             elevation = ButtonDefaults.buttonElevation(20.dp)
         ) {
-            Icon(Icons.Default.Add, contentDescription = "Donate")
+            Icon(Icons.Default.Add, contentDescription = "Add Clip")
             Spacer(modifier.width(width = 4.dp))
             Text(
                 text = stringResource(R.string.addClipButton),

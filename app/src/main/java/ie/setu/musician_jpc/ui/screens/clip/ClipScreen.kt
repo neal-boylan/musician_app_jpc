@@ -105,6 +105,7 @@ fun ClipScreen(modifier: Modifier = Modifier,
                 )
                 Spacer(modifier.weight(1f))
                 InstrumentPicker (
+                    modifier = modifier,
                     onInstrumentChange = { instrument = it }
                 )
             }

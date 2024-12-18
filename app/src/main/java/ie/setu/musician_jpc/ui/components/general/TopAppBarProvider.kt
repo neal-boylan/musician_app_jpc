@@ -22,7 +22,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import ie.setu.musician_jpc.ThemeSwitcher
 import ie.setu.musician_jpc.navigation.AppDestination
 import ie.setu.musician_jpc.navigation.ClipAdd
 import ie.setu.musician_jpc.ui.theme.Musician_jpcTheme
@@ -44,7 +43,7 @@ fun TopAppBarProvider(
             Column {
                 Text(
                     text = currentScreen.label,
-                    color = Color.White
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
                 Row {
                     if (name.isNotEmpty())
@@ -57,15 +56,15 @@ fun TopAppBarProvider(
                     if (email.isNotEmpty())
                         Text(
                             text = " ($email)",
-                            color = Color.LightGray,
                             fontSize = 14.sp,
-                            fontWeight = FontWeight.Bold
+                            fontWeight = FontWeight.Bold,
+                            color =  MaterialTheme.colorScheme.onPrimaryContainer
                         )
                 }
             }
         },
         colors = TopAppBarDefaults.largeTopAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primary
+        containerColor = MaterialTheme.colorScheme.primaryContainer
         ),
         navigationIcon = {
             if (canNavigateBack) {

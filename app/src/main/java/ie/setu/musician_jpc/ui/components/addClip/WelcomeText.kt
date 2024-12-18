@@ -15,6 +15,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ie.setu.musician_jpc.R
 import ie.setu.musician_jpc.ui.theme.Musician_jpcTheme
+import ie.setu.musician_jpc.ui.theme.onPrimaryContainerDarkHighContrast
+import ie.setu.musician_jpc.ui.theme.onPrimaryContainerLight
+import ie.setu.musician_jpc.ui.theme.onPrimaryDark
+import ie.setu.musician_jpc.ui.theme.onPrimaryLight
 
 @Composable
 fun WelcomeText(
@@ -31,13 +35,13 @@ fun WelcomeText(
             text = "Welcome $displayName",
             fontWeight = FontWeight.Bold,
             fontSize = 28.sp,
-            color = Color.Black
+            color = MaterialTheme.colorScheme.primary
         )
         Text(
             text = stringResource(R.string.musicianSubtitle),
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
-            color = MaterialTheme.colorScheme.tertiary
+            color = MaterialTheme.colorScheme.primary
         )
     }
 }

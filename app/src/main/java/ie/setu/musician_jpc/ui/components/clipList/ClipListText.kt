@@ -12,6 +12,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ie.setu.musician_jpc.ui.theme.Musician_jpcTheme
+import ie.setu.musician_jpc.ui.theme.onPrimaryDark
+import ie.setu.musician_jpc.ui.theme.onPrimaryLight
 
 @Composable
 fun ClipListText(modifier: Modifier = Modifier,
@@ -26,7 +28,7 @@ fun ClipListText(modifier: Modifier = Modifier,
             text = "Welcome $displayName",
             fontWeight = FontWeight.Bold,
             fontSize = 28.sp,
-            color = Color.Black
+            color = onPrimaryLight
         )
     }
 }
