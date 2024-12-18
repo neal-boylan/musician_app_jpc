@@ -53,6 +53,7 @@ fun ClipScreen(modifier: Modifier = Modifier,
     val possibleGenres = listOf("Rock", "Pop", "Jazz", "Blues", "Rap", "Metal", "Alternative", "Other")
     val clips = clipListViewModel.uiClips.collectAsState().value
     var videoUri: Uri? by remember { mutableStateOf(Uri.EMPTY) }
+    val displayName = clipViewModel.displayName
 
     Column {
         Column(
@@ -64,7 +65,7 @@ fun ClipScreen(modifier: Modifier = Modifier,
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
 
-            WelcomeText()
+            WelcomeText(displayName = displayName)
 
             TitleInput(
                 modifier = modifier.padding(top = 8.dp,bottom = 8.dp),
@@ -170,7 +171,7 @@ fun PreviewClipScreen(modifier: Modifier = Modifier,
             verticalArrangement = Arrangement.spacedBy(30.dp),
         ) {
 
-            WelcomeText()
+            WelcomeText(displayName = "Homer")
 
             TitleInput(
                 modifier = modifier.padding(top = 8.dp,bottom = 8.dp),

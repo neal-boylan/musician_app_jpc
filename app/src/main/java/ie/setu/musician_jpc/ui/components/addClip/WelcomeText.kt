@@ -17,7 +17,10 @@ import ie.setu.musician_jpc.R
 import ie.setu.musician_jpc.ui.theme.Musician_jpcTheme
 
 @Composable
-fun WelcomeText(modifier: Modifier = Modifier) {
+fun WelcomeText(
+    modifier: Modifier = Modifier,
+    displayName: String,) {
+
     Column(
         modifier = modifier.padding(
             top = 24.dp,
@@ -25,7 +28,7 @@ fun WelcomeText(modifier: Modifier = Modifier) {
         ),
         verticalArrangement = Arrangement.spacedBy(24.dp)) {
         Text(
-            text = stringResource(R.string.musicianTitle),
+            text = "Welcome $displayName",
             fontWeight = FontWeight.Bold,
             fontSize = 28.sp,
             color = Color.Black
@@ -43,6 +46,6 @@ fun WelcomeText(modifier: Modifier = Modifier) {
 @Composable
 fun WelcomePreview() {
     Musician_jpcTheme {
-        WelcomeText()
+        WelcomeText(displayName = "Homer")
     }
 }

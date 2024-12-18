@@ -1,6 +1,7 @@
 package ie.setu.musician_jpc.ui.screens.clipList
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.displayCutoutPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -43,10 +44,8 @@ fun ClipListScreen(modifier: Modifier = Modifier,
     // var showAll by remember { mutableStateOf(false) }
     var showAll = clipListViewModel.showAll.value
     var checked by remember { mutableStateOf(false) }
+    val displayName = clipListViewModel.displayName
 
-    Timber.i("RS : Clips List = $clips")
-    Timber.i("checked = $checked")
-    Timber.i("clipListViewModel.showAll.value = ${clipListViewModel.showAll.value}")
     Column {
         Column(
             modifier = modifier.padding(
@@ -55,7 +54,7 @@ fun ClipListScreen(modifier: Modifier = Modifier,
             ),
         ) {
             if(isLoading) ShowLoader("Loading Clips...")
-            ClipListText()
+            ClipListText(displayName = displayName)
 
 
             Switch(
@@ -112,7 +111,7 @@ fun PreviewClipListScreen(modifier: Modifier = Modifier,
                 end = 24.dp
             ),
         ) {
-            ClipListText()
+            ClipListText(displayName = "Homer")
             if(clips.isEmpty())
                 Centre(Modifier.fillMaxSize()) {
                     Text(color = MaterialTheme.colorScheme.secondary,

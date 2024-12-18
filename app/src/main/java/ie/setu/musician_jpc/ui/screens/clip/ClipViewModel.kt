@@ -22,6 +22,7 @@ constructor(private val repository: FirestoreService,
     var isErr = mutableStateOf(false)
     var error = mutableStateOf(Exception())
     var isLoading = mutableStateOf(false)
+    val displayName get() = authService.currentUser?.displayName.toString()
 
     fun insert(clip: ClipModel) =
         viewModelScope.launch {

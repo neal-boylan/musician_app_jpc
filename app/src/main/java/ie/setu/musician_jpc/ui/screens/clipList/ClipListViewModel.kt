@@ -28,6 +28,7 @@ constructor(private val repository: FirestoreService,
     var isLoading = mutableStateOf(false)
     var error = mutableStateOf(Exception())
     var showAll = mutableStateOf(false)
+    val displayName get() = authService.currentUser?.displayName.toString()
 
     init {
         Timber.i("showAll.value = $showAll.value")
