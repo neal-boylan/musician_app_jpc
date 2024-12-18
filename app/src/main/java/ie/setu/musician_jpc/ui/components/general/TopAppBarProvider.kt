@@ -5,8 +5,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.filled.List
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -18,14 +16,13 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import ie.setu.musician_jpc.R
+import ie.setu.musician_jpc.ThemeSwitcher
 import ie.setu.musician_jpc.navigation.AppDestination
 import ie.setu.musician_jpc.navigation.ClipAdd
 import ie.setu.musician_jpc.ui.theme.Musician_jpcTheme
@@ -38,6 +35,8 @@ fun TopAppBarProvider(
     canNavigateBack: Boolean,
     email: String,
     name: String,
+    darkTheme: Boolean,
+    onThemeChange: () -> Unit,
     navigateUp: () -> Unit = {})
 {
     TopAppBar(
@@ -91,7 +90,11 @@ fun TopAppBarProvider(
                 })
 
         },
-        actions = {DropDownMenu(navController = navController)}
+        actions = {
+            // ThemeSwitcher(darkTheme = darkTheme) { darkTheme = !darkTheme}
+            ToggleThemeButton (darkTheme = darkTheme){ onThemeChange() }
+            DropDownMenu(navController = navController)}
+
     )
 }
 
@@ -104,7 +107,9 @@ fun TopAppBarPreview() {
             ClipAdd,
             true,
             email = "dave@gmail.com",
-            name = "userName!!"
+            name = "userName!!",
+            darkTheme = false,
+            onThemeChange = {}
         )
     }
 }

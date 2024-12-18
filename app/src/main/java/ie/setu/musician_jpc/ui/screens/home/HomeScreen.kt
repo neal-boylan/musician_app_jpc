@@ -25,6 +25,8 @@ import ie.setu.musician_jpc.ui.theme.Musician_jpcTheme
 fun HomeScreen(modifier: Modifier = Modifier,
                homeViewModel: HomeViewModel = hiltViewModel(),
                navController: NavHostController = rememberNavController(),
+               darkTheme: Boolean,
+               onThemeChange: () -> Unit
 ) {
     val currentNavBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = currentNavBackStackEntry?.destination
@@ -50,7 +52,9 @@ fun HomeScreen(modifier: Modifier = Modifier,
             currentScreen = currentBottomScreen,
             canNavigateBack = navController.previousBackStackEntry != null,
             email = userEmail!!,
-            name = userName!!
+            name = userName!!,
+            darkTheme = darkTheme,
+            onThemeChange = onThemeChange
         ) { navController.navigateUp() }
         },
         content = { paddingValues ->
@@ -58,7 +62,9 @@ fun HomeScreen(modifier: Modifier = Modifier,
                 modifier = modifier,
                 navController = navController,
                 startDestination = startScreen,
-                paddingValues = paddingValues
+                paddingValues = paddingValues,
+                darkTheme = darkTheme,
+                onThemeChange = onThemeChange
             )
         },
         bottomBar = {
@@ -75,6 +81,6 @@ fun HomeScreen(modifier: Modifier = Modifier,
 @Composable
 fun MyAppPreview() {
     Musician_jpcTheme() {
-        HomeScreen(modifier = Modifier)
+        HomeScreen(modifier = Modifier, darkTheme = false, onThemeChange = { })
     }
 }

@@ -4,6 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,6 +27,7 @@ class MusicianMainActivity : ComponentActivity() {
         // https://gitlab.com/Elozino/kotlin-articles
         val splashscreen = installSplashScreen()
         var keepSplashScreen = true
+
         super.onCreate(savedInstanceState)
         splashscreen.setKeepOnScreenCondition { keepSplashScreen }
         lifecycleScope.launch {
@@ -28,7 +37,27 @@ class MusicianMainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            Musician_jpcTheme { HomeScreen() }
+            var darkTheme by remember { mutableStateOf(true) }
+            Musician_jpcTheme(darkTheme = darkTheme)
+            {
+                HomeScreen(darkTheme = darkTheme, onThemeChange = { darkTheme = !darkTheme })
+                // ThemeSwitcher(darkTheme = darkTheme) { darkTheme = !darkTheme }
+            }
         }
     }
+}
+
+@Composable
+fun ThemeSwitcher(darkTheme: Boolean, onThemeChange: () -> Unit) {
+    Switch(
+        checked = darkTheme,
+        onCheckedChange = { onThemeChange() },
+        colors = SwitchDefaults.colors(
+            checkedTrackColor = MaterialTheme.colorScheme.secondaryContainer,
+            checkedThumbColor = MaterialTheme.colorScheme.primary,
+            uncheckedTrackColor = MaterialTheme.colorScheme.secondaryContainer,
+            uncheckedThumbColor = MaterialTheme.colorScheme.primary
+        )
+    )
+
 }

@@ -1,7 +1,6 @@
 package ie.setu.musician_jpc.ui.screens.clip
 
 import android.net.Uri
-import androidx.compose.foundation.content.MediaType.Companion.Text
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -33,7 +32,6 @@ import ie.setu.musician_jpc.ui.components.addClip.RadioButtonGroup
 import ie.setu.musician_jpc.ui.components.addClip.TitleInput
 import ie.setu.musician_jpc.ui.components.addClip.WelcomeText
 import ie.setu.musician_jpc.ui.components.addClip.YouTubeURLInput
-import ie.setu.musician_jpc.ui.components.general.ShowPhotoPicker
 import ie.setu.musician_jpc.ui.components.general.ShowVideoPicker
 import ie.setu.musician_jpc.ui.screens.clipList.ClipListViewModel
 import ie.setu.musician_jpc.ui.theme.Musician_jpcTheme

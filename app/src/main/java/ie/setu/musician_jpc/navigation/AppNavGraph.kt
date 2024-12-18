@@ -2,6 +2,7 @@ package ie.setu.musician_jpc.navigation
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.darkColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -22,6 +23,8 @@ fun NavHostProvider(
     navController: NavHostController,
     startDestination: AppDestination,
     paddingValues: PaddingValues,
+    darkTheme: Boolean,
+    onThemeChange: () -> Unit,
 ) {
     NavHost(
         navController = navController,
@@ -34,7 +37,7 @@ fun NavHostProvider(
         }
         composable(route = Home.route) {
             //call our 'Home' Screen Here
-            HomeScreen(modifier = modifier)
+            HomeScreen(modifier = modifier, darkTheme = darkTheme, onThemeChange = onThemeChange)
         }
         composable(route = ClipList.route) {
             //call our 'ClipList' Screen Here

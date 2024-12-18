@@ -65,7 +65,7 @@ fun DropDownMenu(navController: NavController) {
                     )
                 },
                 onClick = {
-                    selectedOptionText = "Info"
+                    selectedOptionText = "About"
                     expanded = false
                     navController.navigate(About.route)
                 },
