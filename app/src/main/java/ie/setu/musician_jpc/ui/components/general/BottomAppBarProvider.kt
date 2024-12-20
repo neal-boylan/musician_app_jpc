@@ -1,5 +1,7 @@
 package ie.setu.musician_jpc.ui.components.general
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -11,8 +13,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.graphics.Color.Companion.Black
-import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -20,12 +20,13 @@ import androidx.navigation.compose.rememberNavController
 import ie.setu.musician_jpc.navigation.AppDestination
 import ie.setu.musician_jpc.navigation.bottomAppBarDestinations
 import ie.setu.musician_jpc.ui.theme.Musician_jpcTheme
+import timber.log.Timber
 
 @Composable
 fun BottomAppBarProvider(
     navController: NavHostController,
     currentScreen: AppDestination,
-    userDestinations: List<AppDestination>
+    userDestinations: List<AppDestination>,
 ) {
     //initializing the default selected item
     var navigationSelectedItem by remember { mutableIntStateOf(0) }
@@ -69,6 +70,6 @@ fun BottomAppBarScreenPreview() {
         BottomAppBarProvider(
             rememberNavController(),
             bottomAppBarDestinations.get(1),
-            bottomAppBarDestinations)
+            bottomAppBarDestinations,)
     }
 }

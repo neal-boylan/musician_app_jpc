@@ -22,6 +22,7 @@ data class ClipModel(
     var videoURI: String = ""
 )
 
+
 val fakeClips = List(30) { i ->
     ClipModel(
         _id = "12345" + i,

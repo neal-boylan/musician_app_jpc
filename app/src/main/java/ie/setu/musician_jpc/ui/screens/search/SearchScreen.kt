@@ -1,4 +1,4 @@
-package ie.setu.musician_jpc.ui.screens.clipList
+package ie.setu.musician_jpc.ui.screens.search
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,11 +11,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -24,24 +26,30 @@ import ie.setu.musician_jpc.R
 import ie.setu.musician_jpc.data.model.ClipModel
 import ie.setu.musician_jpc.ui.components.clipList.ClipCardList
 import ie.setu.musician_jpc.ui.components.clipList.ClipListText
+import ie.setu.musician_jpc.ui.components.clipList.SearchInput
 import ie.setu.musician_jpc.ui.components.general.Centre
 import ie.setu.musician_jpc.ui.components.general.ShowError
 import ie.setu.musician_jpc.ui.components.general.ShowLoader
+import timber.log.Timber
 
 @Composable
-fun ClipListScreen(modifier: Modifier = Modifier,
-                   onClickClipDetails: (String) -> Unit,
-                   clipListViewModel: ClipListViewModel = hiltViewModel(),
-                   )
+fun SearchScreen(modifier: Modifier = Modifier,
+                 onClickClipDetails: (String) -> Unit,
+                 searchViewModel: SearchViewModel = hiltViewModel(),
+)
 {
-    val clips = clipListViewModel.uiClips.collectAsState().value
-    val isError = clipListViewModel.isErr.value
-    val isLoading = clipListViewModel.isLoading.value
-    val error = clipListViewModel.error.value
+    val clips = searchViewModel.uiClips.collectAsState().value
+    val isError = searchViewModel.isErr.value
+    val isLoading = searchViewModel.isLoading.value
+    val error = searchViewModel.error.value
     // var showAll by remember { mutableStateOf(false) }
-    var showAll = clipListViewModel.showAll.value
+    var showAll = searchViewModel.showAll.value
     var checked by remember { mutableStateOf(false) }
-    val displayName = clipListViewModel.displayName
+    val displayName = searchViewModel.displayName
+    var search by remember { mutableStateOf("") }
+//    var search by rememberSaveable(stateSaver = TextFieldValue.Saver) {
+//        mutableStateOf(TextFieldValue("no search"))
+//    }
 
     Column {
         Column(
@@ -50,18 +58,24 @@ fun ClipListScreen(modifier: Modifier = Modifier,
                 end = 24.dp
             ),
         ) {
-            if(isLoading) ShowLoader("Loading Clips...")
+            // if(isLoading) ShowLoader("Loading Clips...")
 
-            ClipListText()
+            SearchInput(modifier = modifier.padding(top = 8.dp,bottom = 8.dp),
+                search = search,
+                onSearchTextChanged = { newSearchText ->
+                    search = newSearchText
+                },)
 
-            Switch(
-                checked = checked,
-                onCheckedChange = {
-                    checked = it
-                    clipListViewModel.showAll.value = it
-                    if(checked) clipListViewModel.getAllClips() else clipListViewModel.getClips()
-                }
-            )
+            searchViewModel.getSearchList(search)
+
+//            Switch(
+//                checked = checked,
+//                onCheckedChange = {
+//                    checked = it
+//                    searchViewModel.showAll.value = it
+//                    if(checked) searchViewModel.getSearchList(search) else searchViewModel.getClips()
+//                }
+//            )
 //            if(!isError)
 //                ShowRefreshList(onClick = { reportViewModel.getDonations() })
 
@@ -82,7 +96,7 @@ fun ClipListScreen(modifier: Modifier = Modifier,
                     clips = clips,
                     onClickClipDetails = onClickClipDetails,
                     onDeleteClip = { clip: ClipModel ->
-                        clipListViewModel.deleteClip(clip)
+                        searchViewModel.deleteClip(clip)
                     },
 //                    onRefreshList = { reportViewModel.getDonations() }
                 )
@@ -90,7 +104,7 @@ fun ClipListScreen(modifier: Modifier = Modifier,
             if (isError) {
                 ShowError(headline = error.message!! + " error...",
                     subtitle = error.toString(),
-                    onClick = { clipListViewModel.getClips() })
+                    onClick = { searchViewModel.getClips() })
             }
         }
 
@@ -98,8 +112,8 @@ fun ClipListScreen(modifier: Modifier = Modifier,
 }
 
 @Composable
-fun PreviewClipListScreen(modifier: Modifier = Modifier,
-                        clips: SnapshotStateList<ClipModel>
+fun PreviewSearchScreen(modifier: Modifier = Modifier,
+                          clips: SnapshotStateList<ClipModel>
 ) {
     Column {
         Column(

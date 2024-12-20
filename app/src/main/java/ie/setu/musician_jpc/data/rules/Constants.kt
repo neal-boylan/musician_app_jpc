@@ -5,6 +5,7 @@ object Constants {
     //Firebase
     const val USER_EMAIL = "email"
     const val CLIP_COLLECTION = "clips"
+    const val TITLE = "title"
 
     //User fields
     const val DISPLAY_NAME = "displayName"

@@ -71,7 +71,7 @@ fun HomeScreen(modifier: Modifier = Modifier,
             BottomAppBarProvider(
                 navController,
                 currentScreen = currentBottomScreen,
-                userDestinations
+                userDestinations,
             )
         }
     )

@@ -10,6 +10,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.dataObjects
 import ie.setu.musician_jpc.data.rules.Constants.CLIP_COLLECTION
 import ie.setu.musician_jpc.data.rules.Constants.USER_EMAIL
+import ie.setu.musician_jpc.data.rules.Constants.TITLE
 import ie.setu.musician_jpc.firebase.services.AuthService
 import kotlinx.coroutines.tasks.await
 import java.util.Date
@@ -26,11 +27,16 @@ class FirestoreRepository
                     private val storageService: StorageService
 ) : FirestoreService {
 
-
     override suspend fun getAll(email: String): Clips {
-
         return firestore.collection(CLIP_COLLECTION)
             .whereEqualTo(USER_EMAIL, email)
+            .dataObjects()
+    }
+
+    override suspend fun getSearch(searchText: String): Clips {
+
+        return firestore.collection(CLIP_COLLECTION)
+            .whereEqualTo(TITLE, searchText)
             .dataObjects()
     }
 

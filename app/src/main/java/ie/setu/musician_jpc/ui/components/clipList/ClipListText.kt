@@ -16,8 +16,7 @@ import ie.setu.musician_jpc.ui.theme.onPrimaryDark
 import ie.setu.musician_jpc.ui.theme.onPrimaryLight
 
 @Composable
-fun ClipListText(modifier: Modifier = Modifier,
-                 displayName: String) {
+fun ClipListText(modifier: Modifier = Modifier,) {
     Column(
         modifier = modifier.padding(
             top = 24.dp,
@@ -25,7 +24,7 @@ fun ClipListText(modifier: Modifier = Modifier,
         ),
         verticalArrangement = Arrangement.spacedBy(24.dp)) {
         Text(
-            text = "Welcome $displayName",
+            text = "Clip List",
             fontWeight = FontWeight.Bold,
             fontSize = 28.sp,
             color = onPrimaryLight
@@ -37,6 +36,6 @@ fun ClipListText(modifier: Modifier = Modifier,
 @Composable
 fun ReportPreview() {
     Musician_jpcTheme {
-        ClipListText(displayName = "Homer")
+        ClipListText()
     }
 }

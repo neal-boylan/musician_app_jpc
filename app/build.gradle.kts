@@ -91,6 +91,8 @@ dependencies {
     //Coil
     implementation(libs.coil.compose)
 
+    implementation("androidx.compose.material3:material3:1.4.0-alpha02")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -109,4 +111,6 @@ dependencies {
 
     //SplashScreen
     implementation("androidx.core:core-splashscreen:1.0.1")
+
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.0")
 }

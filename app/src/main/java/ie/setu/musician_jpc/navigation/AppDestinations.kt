@@ -9,6 +9,7 @@ import androidx.compose.material.icons.filled.Details
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
@@ -23,6 +24,12 @@ object ClipList : AppDestination {
     override val icon = Icons.AutoMirrored.Filled.List
     override val label = "View Clips"
     override val route = "clipList"
+}
+
+object Search : AppDestination {
+    override val icon = Icons.Filled.Search
+    override val label = "Search"
+    override val route = "search"
 }
 
 object ClipAdd : AppDestination {
@@ -71,6 +78,6 @@ object Register : AppDestination {
     override val route = "Register"
 }
 
-val bottomAppBarDestinations = listOf(About, ClipAdd, ClipList, Profile)
+val bottomAppBarDestinations = listOf(About, ClipAdd, ClipList, Profile, Search)
 val userSignedOutDestinations = listOf(Login, Register)
-val allDestinations = listOf(ClipList, ClipAdd, About, Details, Home, Profile, Login, Register)
+val allDestinations = listOf(ClipList, ClipAdd, About, Details, Home, Profile, Login, Register, Search)
