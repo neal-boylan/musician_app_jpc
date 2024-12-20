@@ -31,6 +31,7 @@ constructor(private val repository: FirestoreService,
     var searchText = ""
     val displayName get() = authService.currentUser?.displayName.toString()
 
+
     init {
         getSearchList(searchText)
     }
