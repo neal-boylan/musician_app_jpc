@@ -115,4 +115,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.0")
 
     implementation("androidx.compose.material3:material3")
+
+    // For docked FAB
+    implementation(libs.androidx.material)
+    implementation(libs.androidx.navigation.compose.v240alpha10)
 }

@@ -99,7 +99,9 @@ internal fun ClipCardList(
 
 @Composable
 fun SwipeToDismissItem(
-    // source: https://www.youtube.com/watch?v=Y0xGMXW_b1o
+    // Swipe to dismiss sources:
+    // https://www.geeksforgeeks.org/android-jetpack-compose-swipe-to-dismiss-with-material-3/
+    // https://www.youtube.com/watch?v=Y0xGMXW_b1o
     clip: ClipModel,
     onRemove: () -> Unit,
     onDeleteClip: (ClipModel) -> Unit,

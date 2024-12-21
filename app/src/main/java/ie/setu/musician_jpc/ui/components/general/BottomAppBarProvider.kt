@@ -1,7 +1,12 @@
 package ie.setu.musician_jpc.ui.components.general
 
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -13,7 +18,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -36,7 +43,33 @@ fun BottomAppBarProvider(
         contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
     ) {
         //getting the list of bottom navigation items
-        userDestinations.forEachIndexed { index, navigationItem ->
+        userDestinations.subList(0,2).forEachIndexed { index, navigationItem ->
+            //iterating all items with their respective indexes
+            NavigationBarItem(
+                selected = navigationItem == currentScreen,
+                colors = NavigationBarItemDefaults.colors(
+                    selectedIconColor = MaterialTheme.colorScheme.secondary,
+                    selectedTextColor = MaterialTheme.colorScheme.onSecondary,
+                    unselectedIconColor = MaterialTheme.colorScheme.tertiary,
+                    unselectedTextColor = MaterialTheme.colorScheme.onTertiary
+                ),
+                label = { Text(text = navigationItem.label) },
+                icon = { Icon(navigationItem.icon, contentDescription = navigationItem.label) },
+                onClick = {
+                    navigationSelectedItem = index
+                    navController.navigate(navigationItem.route) {
+                        popUpTo(navController.graph.findStartDestination().id) {
+                            saveState = true
+                        }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                }
+            )
+        }
+        Spacer(modifier = Modifier.size(30.dp))
+
+        userDestinations.subList(3,5).forEachIndexed { index, navigationItem ->
             //iterating all items with their respective indexes
             NavigationBarItem(
                 selected = navigationItem == currentScreen,
