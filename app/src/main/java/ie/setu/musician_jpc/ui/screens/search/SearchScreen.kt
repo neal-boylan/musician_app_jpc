@@ -4,20 +4,17 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -29,8 +26,6 @@ import ie.setu.musician_jpc.ui.components.clipList.ClipListText
 import ie.setu.musician_jpc.ui.components.clipList.SearchInput
 import ie.setu.musician_jpc.ui.components.general.Centre
 import ie.setu.musician_jpc.ui.components.general.ShowError
-import ie.setu.musician_jpc.ui.components.general.ShowLoader
-import timber.log.Timber
 
 @Composable
 fun SearchScreen(modifier: Modifier = Modifier,
@@ -94,10 +89,11 @@ fun SearchScreen(modifier: Modifier = Modifier,
             if (!isError) {
                 ClipCardList(
                     clips = clips,
-                    onClickClipDetails = onClickClipDetails,
                     onDeleteClip = { clip: ClipModel ->
                         searchViewModel.deleteClip(clip)
                     },
+                    onClickClipDetails = onClickClipDetails,
+                    email = searchViewModel.emailAddress,
 //                    onRefreshList = { reportViewModel.getDonations() }
                 )
             }
@@ -137,7 +133,8 @@ fun PreviewSearchScreen(modifier: Modifier = Modifier,
                 ClipCardList(
                     clips = clips,
                     onDeleteClip = {},
-                    onClickClipDetails = {}
+                    onClickClipDetails = {},
+                    email = ""
                 )
         }
     }

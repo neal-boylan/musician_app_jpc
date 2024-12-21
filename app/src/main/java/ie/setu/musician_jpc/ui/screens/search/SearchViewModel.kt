@@ -30,7 +30,7 @@ constructor(private val repository: FirestoreService,
     var showAll = mutableStateOf(false)
     var searchText = ""
     val displayName get() = authService.currentUser?.displayName.toString()
-
+    val emailAddress get() = authService.currentUser?.email.toString()
 
     init {
         getSearchList(searchText)

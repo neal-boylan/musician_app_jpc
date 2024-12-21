@@ -185,15 +185,15 @@ private fun ClipCardContent(
                         Text(text = "Show More...")
                     }
 
-                    FilledTonalIconButton(onClick = { showDeleteConfirmDialog = true }) {
-                        Icon(Icons.Filled.Delete, "Delete ie.setu.donationx.firebase.services.Donation")
-                    }
-                    if (showDeleteConfirmDialog) {
-                        showDeleteAlert(
-                            onDismiss = { showDeleteConfirmDialog = false },
-                            onDelete = onClickDelete
-                        )
-                    }
+//                    FilledTonalIconButton(onClick = { showDeleteConfirmDialog = true }) {
+//                        Icon(Icons.Filled.Delete, "Delete ie.setu.donationx.firebase.services.Donation")
+//                    }
+//                    if (showDeleteConfirmDialog) {
+//                        showDeleteAlert(
+//                            onDismiss = { showDeleteConfirmDialog = false },
+//                            onDelete = onClickDelete
+//                        )
+//                    }
                 }
             }
         }

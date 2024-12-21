@@ -84,6 +84,7 @@ fun ClipListScreen(modifier: Modifier = Modifier,
                     onDeleteClip = { clip: ClipModel ->
                         clipListViewModel.deleteClip(clip)
                     },
+                    email = clipListViewModel.emailAddress
 //                    onRefreshList = { reportViewModel.getDonations() }
                 )
             }
@@ -123,7 +124,8 @@ fun PreviewClipListScreen(modifier: Modifier = Modifier,
                 ClipCardList(
                     clips = clips,
                     onDeleteClip = {},
-                    onClickClipDetails = {}
+                    onClickClipDetails = {},
+                    email = ""
                 )
         }
     }
