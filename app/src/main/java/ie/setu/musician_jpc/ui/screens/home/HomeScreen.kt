@@ -10,6 +10,8 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -18,9 +20,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import ie.setu.musician_jpc.navigation.ClipAdd
 import ie.setu.musician_jpc.navigation.Login
 import ie.setu.musician_jpc.navigation.NavHostProvider
 import ie.setu.musician_jpc.navigation.ClipList
@@ -30,6 +34,7 @@ import ie.setu.musician_jpc.navigation.userSignedOutDestinations
 import ie.setu.musician_jpc.ui.components.general.BottomAppBarProvider
 import ie.setu.musician_jpc.ui.components.general.TopAppBarProvider
 import ie.setu.musician_jpc.ui.theme.Musician_jpcTheme
+import timber.log.Timber
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -58,15 +63,24 @@ fun HomeScreen(modifier: Modifier = Modifier,
     Scaffold(
         modifier = modifier,
         floatingActionButton = {
-            FloatingActionButton(onClick = {},
+            FloatingActionButton(
+                onClick = {
+                    Timber.i("add fab clicked")
+                    navController.navigate(ClipAdd.route) {
+                        popUpTo(navController.graph.findStartDestination().id) {
+                            saveState = true
+                        }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                },
                 shape = CircleShape,
                 modifier = Modifier
                     //.align(Alignment.Center)
-                    .size(80.dp)
+                    .size(50.dp)
                     .offset(y = 50.dp)
                 ) {
-                Icon(imageVector = Icons.Default.Add,
-                    contentDescription = "add")
+                Icon(ClipAdd.icon, contentDescription = ClipAdd.label)
             }
         },
         topBar = { TopAppBarProvider(
