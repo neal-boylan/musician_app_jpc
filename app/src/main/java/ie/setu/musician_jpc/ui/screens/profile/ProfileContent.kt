@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -47,14 +48,16 @@ fun ProfileContent(
         Spacer(modifier = Modifier.height(10.dp))
         Text(
             text = displayName,
-            fontSize = 24.sp
+            fontSize = 24.sp,
+            color = MaterialTheme.colorScheme.onSecondary
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
             text = email,
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            fontFamily = FontFamily.Monospace
+            fontFamily = FontFamily.Monospace,
+            color = MaterialTheme.colorScheme.onSecondary
         )
     }
 }

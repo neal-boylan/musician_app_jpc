@@ -18,10 +18,10 @@ fun ToggleThemeButton(darkTheme: Boolean, onThemeChange: () -> Unit) {
         checked = darkTheme,
         onCheckedChange = {onThemeChange()},
         colors = SwitchDefaults.colors(
-            checkedTrackColor = MaterialTheme.colorScheme.secondaryContainer,
-            checkedThumbColor = MaterialTheme.colorScheme.primary,
-            uncheckedTrackColor = MaterialTheme.colorScheme.secondaryContainer,
-            uncheckedThumbColor = MaterialTheme.colorScheme.primary
+            checkedTrackColor = MaterialTheme.colorScheme.secondary,
+            checkedThumbColor = MaterialTheme.colorScheme.onSecondary,
+            uncheckedTrackColor = MaterialTheme.colorScheme.secondary,
+            uncheckedThumbColor = MaterialTheme.colorScheme.onSecondary
         )
     )
 

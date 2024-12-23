@@ -19,6 +19,7 @@ constructor(private val repository: FirestoreService,
             ) : ViewModel() {
 
     var clip = mutableStateOf(ClipModel())
+    val emailAddress get() = authService.currentUser?.email.toString()
     val id: String = checkNotNull(savedStateHandle["id"])
     var isErr = mutableStateOf(false)
     var error = mutableStateOf(Exception())

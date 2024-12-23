@@ -3,6 +3,7 @@ package ie.setu.musician_jpc.ui.components.clipList
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -27,7 +28,7 @@ fun ClipListText(modifier: Modifier = Modifier,) {
             text = "Clip List",
             fontWeight = FontWeight.Bold,
             fontSize = 28.sp,
-            color = onPrimaryLight
+            color = MaterialTheme.colorScheme.primary
         )
     }
 }

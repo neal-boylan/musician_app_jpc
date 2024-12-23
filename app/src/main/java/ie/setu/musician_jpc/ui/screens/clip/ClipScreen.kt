@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
@@ -66,32 +65,30 @@ fun ClipScreen(modifier: Modifier = Modifier,
             WelcomeText(displayName = displayName)
 
             TitleInput(
-                modifier = modifier.padding(top = 8.dp,bottom = 8.dp),
+                modifier = modifier.padding(top = 4.dp,bottom = 4.dp),
                 onTitleChange = { clipTitle = it }
             )
 
             DescriptionInput(
-                modifier = modifier.padding(top = 8.dp,bottom = 8.dp),
+                modifier = modifier.padding(top = 4.dp,bottom = 4.dp),
                 onDescriptionChange = { clipDescription = it }
             )
             if(mediaType == "YouTube") {
                 YouTubeURLInput(
-                    modifier = modifier.padding(top = 8.dp, bottom = 8.dp),
+                    modifier = modifier.padding(top = 4.dp, bottom = 4.dp),
                     onDescriptionChange = { youTubeURL = it }
                 )
             } else {
                 Row(
+                    modifier = modifier.padding(top = 8.dp, bottom = 8.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 )
                 {
                     ShowVideoPicker(
                         onVideoUriChanged = {
                             videoUri = it
-                            // clipViewModel.updateVideoUri(videoUri!!)
                         }
                     )
-                    Spacer(modifier.weight(1f))
-                    Text(videoUri.toString())
                 }
             }
 
@@ -126,10 +123,6 @@ fun ClipScreen(modifier: Modifier = Modifier,
 
                     selectedGenre.value = oldList
                 })
-
-            /*ProgressBar(
-                modifier = modifier.padding(top = 80.dp,bottom = 24.dp),
-                totalClips = totalClips)*/
 
             AddClipButton (
                 modifier = modifier,

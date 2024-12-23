@@ -17,6 +17,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 // Source: https://github.com/MohsenMashkour/VideoPlayerCompose
 @Composable
 fun VideoPlayer(
+    modifier: Modifier = Modifier,
     videoUri: Uri
 ){
     AndroidView(

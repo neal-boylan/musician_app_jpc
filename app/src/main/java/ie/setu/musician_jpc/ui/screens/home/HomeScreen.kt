@@ -65,7 +65,6 @@ fun HomeScreen(modifier: Modifier = Modifier,
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    Timber.i("add fab clicked")
                     navController.navigate(ClipAdd.route) {
                         popUpTo(navController.graph.findStartDestination().id) {
                             saveState = true

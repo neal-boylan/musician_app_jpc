@@ -42,56 +42,84 @@ fun BottomAppBarProvider(
         containerColor = MaterialTheme.colorScheme.primaryContainer,
         contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
     ) {
-        //getting the list of bottom navigation items
-        userDestinations.subList(0,2).forEachIndexed { index, navigationItem ->
-            //iterating all items with their respective indexes
-            NavigationBarItem(
-                selected = navigationItem == currentScreen,
-                colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = MaterialTheme.colorScheme.secondary,
-                    selectedTextColor = MaterialTheme.colorScheme.onSecondary,
-                    unselectedIconColor = MaterialTheme.colorScheme.tertiary,
-                    unselectedTextColor = MaterialTheme.colorScheme.onTertiary
-                ),
-                label = { Text(text = navigationItem.label) },
-                icon = { Icon(navigationItem.icon, contentDescription = navigationItem.label) },
-                onClick = {
-                    navigationSelectedItem = index
-                    navController.navigate(navigationItem.route) {
-                        popUpTo(navController.graph.findStartDestination().id) {
-                            saveState = true
+        if (userDestinations.size == 2){
+            //getting the list of bottom navigation items
+            userDestinations.forEachIndexed { index, navigationItem ->
+                //iterating all items with their respective indexes
+                NavigationBarItem(
+                    selected = navigationItem == currentScreen,
+                    colors = NavigationBarItemDefaults.colors(
+                        selectedIconColor = MaterialTheme.colorScheme.tertiary,
+                        selectedTextColor = MaterialTheme.colorScheme.tertiary,
+                        unselectedIconColor = MaterialTheme.colorScheme.secondary,
+                        unselectedTextColor = MaterialTheme.colorScheme.secondary
+                    ),
+                    label = { Text(text = navigationItem.label) },
+                    icon = { Icon(navigationItem.icon, contentDescription = navigationItem.label) },
+                    onClick = {
+                        navigationSelectedItem = index
+                        navController.navigate(navigationItem.route) {
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
                         }
-                        launchSingleTop = true
-                        restoreState = true
                     }
-                }
-            )
-        }
-        Spacer(modifier = Modifier.size(30.dp))
+                )
+            }
+        } else {
+            //getting the list of bottom navigation items
+            userDestinations.subList(0, 2).forEachIndexed { index, navigationItem ->
+                //iterating all items with their respective indexes
+                NavigationBarItem(
+                    selected = navigationItem == currentScreen,
+                    colors = NavigationBarItemDefaults.colors(
+                        selectedIconColor = MaterialTheme.colorScheme.tertiary,
+                        selectedTextColor = MaterialTheme.colorScheme.tertiary,
+                        unselectedIconColor = MaterialTheme.colorScheme.secondary,
+                        unselectedTextColor = MaterialTheme.colorScheme.secondary
+                    ),
+                    label = { Text(text = navigationItem.label) },
+                    icon = { Icon(navigationItem.icon, contentDescription = navigationItem.label) },
+                    onClick = {
+                        navigationSelectedItem = index
+                        navController.navigate(navigationItem.route) {
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
+                    }
+                )
+            }
+            Spacer(modifier = Modifier.size(30.dp))
 
-        userDestinations.subList(3,5).forEachIndexed { index, navigationItem ->
-            //iterating all items with their respective indexes
-            NavigationBarItem(
-                selected = navigationItem == currentScreen,
-                colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = MaterialTheme.colorScheme.secondary,
-                    selectedTextColor = MaterialTheme.colorScheme.onSecondary,
-                    unselectedIconColor = MaterialTheme.colorScheme.tertiary,
-                    unselectedTextColor = MaterialTheme.colorScheme.onTertiary
-                ),
-                label = { Text(text = navigationItem.label) },
-                icon = { Icon(navigationItem.icon, contentDescription = navigationItem.label) },
-                onClick = {
-                    navigationSelectedItem = index
-                    navController.navigate(navigationItem.route) {
-                        popUpTo(navController.graph.findStartDestination().id) {
-                            saveState = true
+            userDestinations.subList(2, 4).forEachIndexed { index, navigationItem ->
+                //iterating all items with their respective indexes
+                NavigationBarItem(
+                    selected = navigationItem == currentScreen,
+                    colors = NavigationBarItemDefaults.colors(
+                        selectedIconColor = MaterialTheme.colorScheme.tertiary,
+                        selectedTextColor = MaterialTheme.colorScheme.tertiary,
+                        unselectedIconColor = MaterialTheme.colorScheme.secondary,
+                        unselectedTextColor = MaterialTheme.colorScheme.secondary
+                    ),
+                    label = { Text(text = navigationItem.label) },
+                    icon = { Icon(navigationItem.icon, contentDescription = navigationItem.label) },
+                    onClick = {
+                        navigationSelectedItem = index
+                        navController.navigate(navigationItem.route) {
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
                         }
-                        launchSingleTop = true
-                        restoreState = true
                     }
-                }
-            )
+                )
+            }
         }
     }
 }

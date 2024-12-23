@@ -40,7 +40,7 @@ fun AboutScreen(modifier: Modifier = Modifier
             )
         }
         Centre(Modifier.fillMaxSize()) {
-            Text(color = Color.White,
+            Text(color = MaterialTheme.colorScheme.onPrimary,
                 fontWeight = FontWeight.Bold,
                 fontSize = 30.sp,
                 lineHeight = 34.sp,

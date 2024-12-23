@@ -58,18 +58,16 @@ fun AddClipButton(
                 clipViewModel.insert(clip)
                 onTotalClipsChange(totalClips)
                 Toast.makeText(context, "Clip Added", Toast.LENGTH_LONG).show()
-                Timber.i("Clip info : $clip")
-                Timber.i("Donation List info : ${clips.toList()}")
             },
             elevation = ButtonDefaults.buttonElevation(20.dp)
         ) {
-            Icon(Icons.Default.Add, contentDescription = "Donate")
+            Icon(Icons.Default.Add, contentDescription = "Add Clip")
             Spacer(modifier.width(width = 4.dp))
             Text(
                 text = stringResource(R.string.addClipButton),
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
-                color = onPrimaryLight
+                color = MaterialTheme.colorScheme.onPrimary
             )
         }
 
@@ -80,7 +78,7 @@ fun AddClipButton(
                     style = SpanStyle(
                         fontWeight = FontWeight.Bold,
                         fontSize = 20.sp,
-                        color = Color.Black
+                        color = MaterialTheme.colorScheme.primary
                     )
                 ) {
                     append(stringResource(R.string.totalClips))
@@ -90,7 +88,7 @@ fun AddClipButton(
                     style = SpanStyle(
                         fontWeight = FontWeight.Bold,
                         fontSize = 20.sp,
-                        color = onPrimaryDark)
+                        color = MaterialTheme.colorScheme.primary)
                 ) {
                     append(totalClips.toString())
                 }

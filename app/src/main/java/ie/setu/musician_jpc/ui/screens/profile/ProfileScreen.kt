@@ -1,6 +1,7 @@
 package ie.setu.musician_jpc.ui.screens.profile
 
 import android.net.Uri
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -17,7 +18,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -29,6 +29,7 @@ import ie.setu.musician_jpc.ui.screens.register.RegisterViewModel
 
 @Composable
 fun ProfileScreen(
+    modifier: Modifier = Modifier,
     onSignOut: () -> Unit = {},
     profileViewModel: ProfileViewModel = hiltViewModel(),
     loginViewModel: LoginViewModel = hiltViewModel(),
@@ -37,9 +38,10 @@ fun ProfileScreen(
     var photoUri: Uri? by remember { mutableStateOf(profileViewModel.photoUri) }
 
     Column(
-        Modifier.fillMaxSize(),
+        modifier = modifier.background(MaterialTheme.colorScheme.secondary).fillMaxSize(),
+        // Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceEvenly
+        verticalArrangement = Arrangement.SpaceEvenly,
     ) {
         HeadingTextComponent(value = stringResource(id = R.string.account_settings))
         Spacer(modifier = Modifier.height(10.dp))
@@ -66,8 +68,8 @@ fun ProfileScreen(
                 registerViewModel.resetRegisterFlow()
             },
             colors = ButtonDefaults.buttonColors(
-                contentColor = Color.White,
-                containerColor = MaterialTheme.colorScheme.tertiary
+                contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                containerColor = MaterialTheme.colorScheme.primaryContainer
             ),
         ) {
             Text(text = "Logout")

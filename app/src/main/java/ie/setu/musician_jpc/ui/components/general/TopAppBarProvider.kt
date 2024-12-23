@@ -15,7 +15,6 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -49,7 +48,7 @@ fun TopAppBarProvider(
                     if (name.isNotEmpty())
                         Text(
                             text = name,
-                            color = MaterialTheme.colorScheme.tertiaryContainer,
+                            color = MaterialTheme.colorScheme.onPrimaryContainer,
                             fontSize = 14.sp,
                             fontWeight = FontWeight.Bold
                         )
@@ -72,21 +71,21 @@ fun TopAppBarProvider(
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = "Back Button",
-                        tint = Color.White,
+                        tint = MaterialTheme.colorScheme.onPrimaryContainer,
                         modifier = Modifier.size(30.dp)
                     )
                 }
             }
-            else
-                IconButton(onClick = {
-                }, content = {
-
-                    Icon(
-                        imageVector = Icons.Default.Menu,
-                        contentDescription = null,
-                        tint = Color.White
-                    )
-                })
+//            else
+//                IconButton(onClick = {
+//                }, content = {
+//
+//                    Icon(
+//                        imageVector = Icons.Default.Menu,
+//                        contentDescription = null,
+//                        tint = MaterialTheme.colorScheme.onPrimaryContainer
+//                    )
+//                })
 
         },
         actions = {

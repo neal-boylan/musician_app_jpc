@@ -20,6 +20,7 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SwipeToDismissBox
 import androidx.compose.material3.SwipeToDismissBoxState
 import androidx.compose.material3.SwipeToDismissBoxValue
@@ -73,13 +74,6 @@ internal fun ClipCardList(
                 )
             } else {
                 // User cannot delete cards that aren't theirs
-//                SwipeToDismissItem(
-//                    clip = clip,
-//                    onRemove = {  },
-//                    modifier = Modifier.animateItemPlacement(tween(200)),
-//                    onDeleteClip = {  },
-//                    onClickClipDetails = onClickClipDetails
-//                )
                 ClipCard(
                     title = clip.title,
                     description = clip.description,
@@ -175,8 +169,8 @@ fun SwipeToDismissItem(
 @Composable
 fun DismissBackground(dismissState: SwipeToDismissBoxState) {
     val color = when (dismissState.dismissDirection) {
-        SwipeToDismissBoxValue.StartToEnd -> Color(0xFFFF1744)
-        SwipeToDismissBoxValue.EndToStart -> Color(0xFF1DE9B6)
+        SwipeToDismissBoxValue.StartToEnd -> MaterialTheme.colorScheme.error
+        SwipeToDismissBoxValue.EndToStart -> MaterialTheme.colorScheme.tertiary
         SwipeToDismissBoxValue.Settled -> Color.Transparent
     }
 

@@ -10,6 +10,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -20,6 +21,7 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material.icons.filled.VideoCameraFront
+import androidx.compose.material.icons.filled.YoutubeSearchedFor
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -139,6 +141,7 @@ private fun ClipCardContent(
                         .size(50.dp)
                         .clip(CircleShape)
                 )
+                Spacer(modifier = Modifier.padding(8.dp))
                 Text(
                     text = title,
                     style = MaterialTheme.typography.headlineMedium.copy(
@@ -148,9 +151,9 @@ private fun ClipCardContent(
 
             }
             Row(verticalAlignment = Alignment.CenterVertically) {
-                if (mediaType == "Audio") {
+                if (mediaType == "YouTube") {
                     Icon(
-                        imageVector = Icons.Filled.AudioFile,
+                        imageVector = Icons.Filled.YoutubeSearchedFor,
                         "Clip Media Type",
                         Modifier.padding(end = 8.dp)
                     )

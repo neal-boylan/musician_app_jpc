@@ -16,6 +16,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 // Source: https://github.com/MohsenMashkour/VideoPlayerCompose
 @Composable
 fun YouTubePlayer(
+    modifier: Modifier = Modifier,
     youtubeVideoId: String,
     lifecycleOwner: LifecycleOwner
 ){

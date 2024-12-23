@@ -25,8 +25,8 @@ fun RadioButtonGroup(modifier: Modifier = Modifier,
                      onMediaTypeChange: (String) -> Unit) {
 
     val radioOptions = listOf(
-        stringResource(R.string.video),
-        stringResource(R.string.audio)
+        stringResource(R.string.youtube),
+        stringResource(R.string.videoFile)
     )
     var clipType by remember { mutableStateOf(radioOptions[0]) }
 

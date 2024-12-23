@@ -39,7 +39,6 @@ constructor(private val repository: FirestoreService,
     fun getSearchList(searchText: String) {
         viewModelScope.launch {
             try {
-                Timber.i("search: $searchText")
                 isLoading.value = true
                 repository.getSearch(searchText).collect { items ->
                     _clips.value = items

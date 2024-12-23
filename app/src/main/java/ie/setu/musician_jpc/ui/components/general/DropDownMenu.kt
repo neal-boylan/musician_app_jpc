@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
@@ -26,6 +27,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import ie.setu.musician_jpc.navigation.About
+import ie.setu.musician_jpc.navigation.Profile
 import ie.setu.musician_jpc.ui.theme.Musician_jpcTheme
 
 @Composable
@@ -45,7 +47,7 @@ fun DropDownMenu(navController: NavController) {
             Icon(
                 imageVector = Icons.Default.MoreVert,
                 contentDescription = "Open Info",
-                tint = Color.White,
+                tint = MaterialTheme.colorScheme.onPrimaryContainer,
                 modifier = Modifier.size(30.dp)
             )
         }
@@ -55,12 +57,12 @@ fun DropDownMenu(navController: NavController) {
             onDismissRequest = { expanded = false },
         ) {
             DropdownMenuItem(
-                text = { Text(color = Color.White,text = "Info", fontSize = 18.sp) },
+                text = { Text(color = MaterialTheme.colorScheme.onSecondary,text = "About", fontSize = 18.sp) },
                 trailingIcon = {
                     Icon(
                         imageVector = Icons.Filled.Info,
-                        contentDescription = "Info",
-                        tint = Color.White,
+                        contentDescription = "About",
+                        tint = MaterialTheme.colorScheme.onSecondary,
                         modifier = Modifier.size(24.dp)
                     )
                 },
@@ -68,6 +70,22 @@ fun DropDownMenu(navController: NavController) {
                     selectedOptionText = "About"
                     expanded = false
                     navController.navigate(About.route)
+                },
+            )
+            DropdownMenuItem(
+                text = { Text(color = MaterialTheme.colorScheme.onSecondary,text = "Profile", fontSize = 18.sp) },
+                trailingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Person,
+                        contentDescription = "Profile",
+                        tint = MaterialTheme.colorScheme.onSecondary,
+                        modifier = Modifier.size(24.dp)
+                    )
+                },
+                onClick = {
+                    selectedOptionText = "Profile"
+                    expanded = false
+                    navController.navigate(Profile.route)
                 },
             )
         }

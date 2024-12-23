@@ -12,10 +12,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ie.setu.musician_jpc.data.model.ClipModel
 import ie.setu.musician_jpc.ui.theme.Musician_jpcTheme
 
 @Composable
-fun DetailsScreenText(modifier: Modifier = Modifier) {
+fun DetailsScreenText(modifier: Modifier = Modifier, clip: ClipModel, edit: Boolean = false) {
     Column(
         modifier = modifier.padding(
             top = 24.dp,
@@ -26,21 +27,28 @@ fun DetailsScreenText(modifier: Modifier = Modifier) {
             text = "Clip Details",
             fontWeight = FontWeight.Bold,
             fontSize = 28.sp,
-            color = Color.Black
+            color = MaterialTheme.colorScheme.primary
         )
-        Text(
-            text = "Please Update your Title/Description Below",
-            fontWeight = FontWeight.Bold,
-            fontSize = 20.sp,
-            color = MaterialTheme.colorScheme.tertiary
-        )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DetailScreenPreview() {
-    Musician_jpcTheme {
-        DetailsScreenText(modifier = Modifier)
+        if (edit) {
+            Text(
+                text = "Please Update your Title/Description Below",
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+                color = MaterialTheme.colorScheme.primary
+            )
+        } else {
+            ReadOnlyTextField(
+                value = clip.title,
+                label = "Media Type"
+            )
+            ReadOnlyTextField(
+                value = clip.description,
+                label = "Media Type"
+            )
+            ReadOnlyTextField(
+                value = clip.instrument,
+                label = "Instrument"
+            )
+        }
     }
 }

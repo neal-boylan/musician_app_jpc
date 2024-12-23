@@ -30,7 +30,7 @@ fun TitleInput(
             focusedBorderColor = MaterialTheme.colorScheme.primary,
             unfocusedBorderColor = MaterialTheme.colorScheme.secondary,
         ),
-        maxLines = 2,
+        maxLines = 1,
         value = title,
         onValueChange = {
             title = it

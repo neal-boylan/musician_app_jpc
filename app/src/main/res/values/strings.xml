@@ -3,8 +3,8 @@
     <string name="musicianTitle">Welcome Homer</string>
     <string name="musicianSubtitle">Add your clip here</string>
     <string name="addClipButton">ADD CLIP</string>
-    <string name="video">YouTube</string>
-    <string name="audio">Video URL</string>
+    <string name="youtube">YouTube</string>
+    <string name="videoFile">Video File</string>
     <string name="amount">Amount</string>
     <string name="totalClips">"Total Clips: "</string>
     <string name="totalSoFar">€%d</string>

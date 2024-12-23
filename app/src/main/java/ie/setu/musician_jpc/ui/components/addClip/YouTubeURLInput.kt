@@ -30,7 +30,7 @@ fun YouTubeURLInput(
             focusedBorderColor = MaterialTheme.colorScheme.primary,
             unfocusedBorderColor = MaterialTheme.colorScheme.secondary,
         ),
-        maxLines = 2,
+        maxLines = 1,
         value = youTubeURL,
         onValueChange = {
             youTubeURL = it.substringAfterLast("=")
