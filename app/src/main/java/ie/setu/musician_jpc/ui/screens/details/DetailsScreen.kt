@@ -41,6 +41,7 @@ import ie.setu.musician_jpc.ui.components.details.YouTubePlayer
 import ie.setu.musician_jpc.ui.components.general.ShowLoader
 import android.net.Uri
 import ie.setu.musician_jpc.ui.components.details.VideoPlayer
+import ie.setu.musician_jpc.ui.components.general.ShowVideoPicker
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -52,7 +53,9 @@ fun DetailsScreen(
     val clipEmail = clip.email
     val errorEmptyDescription = "Description Cannot be Empty..."
     val errorShortDescription = "Description must be at least 2 characters"
-    var text by rememberSaveable { mutableStateOf("") }
+    var titleText by rememberSaveable { mutableStateOf("") }
+    var decscriptionText by rememberSaveable { mutableStateOf("") }
+    var youTubeText by rememberSaveable { mutableStateOf("") }
     var onDescriptionChanged by rememberSaveable { mutableStateOf(false) }
     var isEmptyError by rememberSaveable { mutableStateOf(false) }
     var isShortError by rememberSaveable { mutableStateOf(false) }
@@ -109,30 +112,19 @@ fun DetailsScreen(
 
                     if (clipEmail == detailViewModel.emailAddress) {
                         Spacer(modifier = Modifier.height(16.dp))
-
-                        //Payment Type Field
-                        ReadOnlyTextField(
-                            value = clip.mediaType,
-                            label = "Media Type"
-                        )
-                        //Payment Amount Field
-                        ReadOnlyTextField(
-                            value = clip.instrument,
-                            label = "Instrument"
-                        )
-
-                        //Description Field
-                        text = clip.description
+                        youTubeText = clip.youTubeURL
                         OutlinedTextField(
                             modifier = Modifier.fillMaxWidth(),
-                            value = text,
+                            value = youTubeText,
                             onValueChange = {
-                                text = it
-                                validate(text)
-                                clip.description = text
+                                youTubeText = it
+                                validate(youTubeText)
+                                clip.mediaType = "YouTube"
+                                clip.youTubeURL = youTubeText.substringAfterLast("=")
+                                clip.videoURI = ""
                             },
                             maxLines = 1,
-                            label = { Text(text = "Description") },
+                            label = { Text(text = "Edit YouTube URL") },
                             isError = isEmptyError || isShortError,
                             supportingText = {
                                 if (isEmptyError) {
@@ -163,12 +155,117 @@ fun DetailsScreen(
                                         tint = MaterialTheme.colorScheme.primary
                                     )
                             },
-                            keyboardActions = KeyboardActions { validate(text) },
+                            keyboardActions = KeyboardActions { validate(youTubeText) },
                             colors = OutlinedTextFieldDefaults.colors(
                                 unfocusedBorderColor = MaterialTheme.colorScheme.secondary,
                             )
                         )
-                        //End of Description Field
+
+                        Text("OR")
+
+                        ShowVideoPicker(
+                            onVideoUriChanged = {
+                                clip.videoURI = it.toString()
+                                clip.youTubeURL = ""
+                                clip.mediaType = "Video File"
+                                validate(clip.videoURI)
+
+                            }
+                        )
+                        titleText = clip.title
+                        OutlinedTextField(
+                            modifier = Modifier.fillMaxWidth(),
+                            value = titleText,
+                            onValueChange = {
+                                titleText = it
+                                validate(titleText)
+                                clip.title = titleText
+                            },
+                            maxLines = 1,
+                            label = { Text(text = "Edit Clip Title") },
+                            isError = isEmptyError || isShortError,
+                            supportingText = {
+                                if (isEmptyError) {
+                                    Text(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        text = errorEmptyDescription,
+                                        color = MaterialTheme.colorScheme.error
+                                    )
+                                } else
+                                    if (isShortError) {
+                                        Text(
+                                            modifier = Modifier.fillMaxWidth(),
+                                            text = errorShortDescription,
+                                            color = MaterialTheme.colorScheme.error
+                                        )
+                                    }
+                            },
+                            trailingIcon = {
+                                if (isEmptyError || isShortError)
+                                    Icon(
+                                        Icons.Filled.Warning,
+                                        "error",
+                                        tint = MaterialTheme.colorScheme.error
+                                    )
+                                else
+                                    Icon(
+                                        Icons.Default.Edit, contentDescription = "add/edit",
+                                        tint = MaterialTheme.colorScheme.primary
+                                    )
+                            },
+                            keyboardActions = KeyboardActions { validate(titleText) },
+                            colors = OutlinedTextFieldDefaults.colors(
+                                unfocusedBorderColor = MaterialTheme.colorScheme.secondary,
+                            )
+                        )
+
+                        decscriptionText = clip.description
+                        OutlinedTextField(
+                            modifier = Modifier.fillMaxWidth(),
+                            value = decscriptionText,
+                            onValueChange = {
+                                decscriptionText = it
+                                validate(decscriptionText)
+                                clip.description = decscriptionText
+                            },
+                            maxLines = 1,
+                            label = { Text(text = "Edit Clip Description") },
+                            isError = isEmptyError || isShortError,
+                            supportingText = {
+                                if (isEmptyError) {
+                                    Text(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        text = errorEmptyDescription,
+                                        color = MaterialTheme.colorScheme.error
+                                    )
+                                } else
+                                    if (isShortError) {
+                                        Text(
+                                            modifier = Modifier.fillMaxWidth(),
+                                            text = errorShortDescription,
+                                            color = MaterialTheme.colorScheme.error
+                                        )
+                                    }
+                            },
+                            trailingIcon = {
+                                if (isEmptyError || isShortError)
+                                    Icon(
+                                        Icons.Filled.Warning,
+                                        "error",
+                                        tint = MaterialTheme.colorScheme.error
+                                    )
+                                else
+                                    Icon(
+                                        Icons.Default.Edit, contentDescription = "add/edit",
+                                        tint = MaterialTheme.colorScheme.primary
+                                    )
+                            },
+                            keyboardActions = KeyboardActions { validate(decscriptionText) },
+                            colors = OutlinedTextFieldDefaults.colors(
+                                unfocusedBorderColor = MaterialTheme.colorScheme.secondary,
+                            )
+                        )
+
                         Spacer(modifier.height(height = 16.dp))
                         Button(
                             onClick = {
@@ -184,7 +281,7 @@ fun DetailsScreen(
                                 text = "Save",
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 20.sp,
-                                color = MaterialTheme.colorScheme.primary
+                                color = MaterialTheme.colorScheme.onPrimary
                             )
                         }
                     }

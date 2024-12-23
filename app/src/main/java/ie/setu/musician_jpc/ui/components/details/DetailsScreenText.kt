@@ -39,15 +39,19 @@ fun DetailsScreenText(modifier: Modifier = Modifier, clip: ClipModel, edit: Bool
         } else {
             ReadOnlyTextField(
                 value = clip.title,
-                label = "Media Type"
+                label = "Title"
             )
             ReadOnlyTextField(
                 value = clip.description,
-                label = "Media Type"
+                label = "Description"
             )
             ReadOnlyTextField(
                 value = clip.instrument,
                 label = "Instrument"
+            )
+            ReadOnlyTextField(
+                value = clip.email,
+                label = "Uploader Email"
             )
         }
     }

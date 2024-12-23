@@ -11,7 +11,7 @@ data class ClipModel(
     @DocumentId val _id: String = "N/A",
     var title: String = "N/A",
     var description: String = "Just a little something",
-    val mediaType: String = "N/A",
+    var mediaType: String = "N/A",
     val instrument: String = "N/A",
     val genres: List<String> = arrayListOf(),
     val dateAdded: Date = Date(),
