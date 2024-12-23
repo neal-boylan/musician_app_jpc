@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -34,8 +33,10 @@ fun TopAppBarProvider(
     email: String,
     name: String,
     darkTheme: Boolean,
+    isActiveSession: Boolean,
     onThemeChange: () -> Unit,
-    navigateUp: () -> Unit = {})
+    navigateUp: () -> Unit = {},
+)
 {
     TopAppBar(
         title = {
@@ -91,7 +92,9 @@ fun TopAppBarProvider(
         actions = {
             // ThemeSwitcher(darkTheme = darkTheme) { darkTheme = !darkTheme}
             ToggleThemeButton (darkTheme = darkTheme){ onThemeChange() }
-            DropDownMenu(navController = navController)}
+            DropDownMenu(
+                isActiveSession = isActiveSession,
+                navController = navController)}
 
     )
 }
@@ -107,7 +110,8 @@ fun TopAppBarPreview() {
             email = "dave@gmail.com",
             name = "userName!!",
             darkTheme = false,
-            onThemeChange = {}
+            isActiveSession = true,
+            onThemeChange = {},
         )
     }
 }

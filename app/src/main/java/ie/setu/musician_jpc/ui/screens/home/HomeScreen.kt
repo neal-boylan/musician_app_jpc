@@ -4,18 +4,12 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -34,7 +28,6 @@ import ie.setu.musician_jpc.navigation.userSignedOutDestinations
 import ie.setu.musician_jpc.ui.components.general.BottomAppBarProvider
 import ie.setu.musician_jpc.ui.components.general.TopAppBarProvider
 import ie.setu.musician_jpc.ui.theme.Musician_jpcTheme
-import timber.log.Timber
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -59,58 +52,96 @@ fun HomeScreen(modifier: Modifier = Modifier,
     else bottomAppBarDestinations
 
     if (isActiveSession) startScreen = ClipList
-
-    Scaffold(
-        modifier = modifier,
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = {
-                    navController.navigate(ClipAdd.route) {
-                        popUpTo(navController.graph.findStartDestination().id) {
-                            saveState = true
+    if (isActiveSession) {
+        Scaffold(
+            modifier = modifier,
+            floatingActionButton = {
+                FloatingActionButton(
+                    onClick = {
+                        navController.navigate(ClipAdd.route) {
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
                         }
-                        launchSingleTop = true
-                        restoreState = true
-                    }
-                },
-                shape = CircleShape,
-                modifier = Modifier
-                    //.align(Alignment.Center)
-                    .size(50.dp)
-                    .offset(y = 50.dp)
+                    },
+                    shape = CircleShape,
+                    modifier = Modifier
+                        //.align(Alignment.Center)
+                        .size(50.dp)
+                        .offset(y = 50.dp)
                 ) {
-                Icon(ClipAdd.icon, contentDescription = ClipAdd.label)
-            }
-        },
-        topBar = { TopAppBarProvider(
-            navController = navController,
-            currentScreen = currentBottomScreen,
-            canNavigateBack = navController.previousBackStackEntry != null,
-            email = userEmail!!,
-            name = userName!!,
-            darkTheme = darkTheme,
-            onThemeChange = onThemeChange
-        ) { navController.navigateUp() }
-        },
-        content = { paddingValues ->
-            NavHostProvider(
-                modifier = modifier,
-                navController = navController,
-                startDestination = startScreen,
-                paddingValues = paddingValues,
-                darkTheme = darkTheme,
-                onThemeChange = onThemeChange
-            )
-        },
-        bottomBar = {
-            BottomAppBarProvider(
-                navController,
-                currentScreen = currentBottomScreen,
-                userDestinations,
-            )
-        },
-        floatingActionButtonPosition = FabPosition.Center,
-    )
+                    Icon(ClipAdd.icon, contentDescription = ClipAdd.label)
+                }
+            },
+            topBar = {
+                TopAppBarProvider(
+                    navController = navController,
+                    currentScreen = currentBottomScreen,
+                    canNavigateBack = navController.previousBackStackEntry != null,
+                    email = userEmail!!,
+                    name = userName!!,
+                    darkTheme = darkTheme,
+                    isActiveSession = isActiveSession,
+                    onThemeChange = onThemeChange,
+                ) { navController.navigateUp() }
+            },
+            content = { paddingValues ->
+                NavHostProvider(
+                    modifier = modifier,
+                    navController = navController,
+                    startDestination = startScreen,
+                    paddingValues = paddingValues,
+                    darkTheme = darkTheme,
+                    onThemeChange = onThemeChange
+                )
+            },
+            bottomBar = {
+                BottomAppBarProvider(
+                    navController,
+                    currentScreen = currentBottomScreen,
+                    userDestinations,
+                )
+            },
+            floatingActionButtonPosition = FabPosition.Center,
+        )
+    } else {
+        Scaffold(
+            modifier = modifier,
+            topBar = {
+                TopAppBarProvider(
+                    navController = navController,
+                    currentScreen = currentBottomScreen,
+                    canNavigateBack = navController.previousBackStackEntry != null,
+                    email = userEmail!!,
+                    name = userName!!,
+                    darkTheme = darkTheme,
+                    isActiveSession = isActiveSession,
+                    onThemeChange = onThemeChange,
+                    { navController.navigateUp() },
+                )
+            },
+            content = { paddingValues ->
+                NavHostProvider(
+                    modifier = modifier,
+                    navController = navController,
+                    startDestination = startScreen,
+                    paddingValues = paddingValues,
+                    darkTheme = darkTheme,
+                    onThemeChange = onThemeChange
+                )
+            },
+            bottomBar = {
+                BottomAppBarProvider(
+                    navController,
+                    currentScreen = currentBottomScreen,
+                    userDestinations,
+                )
+            },
+            floatingActionButtonPosition = FabPosition.Center,
+        )
+    }
 }
 
 @Preview(showBackground = true)

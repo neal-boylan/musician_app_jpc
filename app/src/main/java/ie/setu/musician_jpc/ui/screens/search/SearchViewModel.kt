@@ -28,12 +28,12 @@ constructor(private val repository: FirestoreService,
     var isLoading = mutableStateOf(false)
     var error = mutableStateOf(Exception())
     var showAll = mutableStateOf(false)
-    var searchText = ""
+    var searchText = mutableStateOf("")
     val displayName get() = authService.currentUser?.displayName.toString()
     val emailAddress get() = authService.currentUser?.email.toString()
 
     init {
-        getSearchList(searchText)
+        getSearchList(searchText.value)
     }
 
     fun getSearchList(searchText: String) {

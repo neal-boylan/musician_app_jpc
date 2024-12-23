@@ -26,6 +26,7 @@ import ie.setu.musician_jpc.ui.components.clipList.ClipListText
 import ie.setu.musician_jpc.ui.components.clipList.SearchInput
 import ie.setu.musician_jpc.ui.components.general.Centre
 import ie.setu.musician_jpc.ui.components.general.ShowError
+import timber.log.Timber
 
 @Composable
 fun SearchScreen(modifier: Modifier = Modifier,
@@ -60,7 +61,7 @@ fun SearchScreen(modifier: Modifier = Modifier,
                 onSearchTextChanged = { newSearchText ->
                     search = newSearchText
                 },)
-
+            Timber.i("search: $search")
             searchViewModel.getSearchList(search)
 
 //            Switch(
