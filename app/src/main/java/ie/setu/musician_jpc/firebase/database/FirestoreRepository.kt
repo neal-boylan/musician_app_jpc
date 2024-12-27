@@ -34,11 +34,7 @@ class FirestoreRepository
     }
 
     override suspend fun getSearch(searchText: String): Clips {
-
         return firestore.collection(CLIP_COLLECTION)
-//            .whereEqualTo(TITLE, searchText.lowercase())
-//            .dataObjects()
-
             .whereGreaterThanOrEqualTo(TITLE, searchText)
             .whereLessThan(TITLE, searchText +'z')
             .dataObjects()
@@ -58,13 +54,17 @@ class FirestoreRepository
 
     override suspend fun insert(email: String, clip: Clip)
     {
-        val uri = Uri.parse("android.resource://ie.setu.musician_jpc/" + R.raw.guitar)
+        if (clip.mediaType == "YouTube") {
+            clip.videoURI = ""
+        } else {
+            clip.youTubeURL = ""
+        }
 
         val clipWithEmailAndImage =
             clip.copy(
                 email = email,
                 imageUri = auth.customPhotoUri!!.toString(),
-                videoURI = uploadCustomVideoUri(uri).toString()
+                // videoURI = uploadCustomVideoUri(uri).toString()
             )
 
         firestore.collection(CLIP_COLLECTION)

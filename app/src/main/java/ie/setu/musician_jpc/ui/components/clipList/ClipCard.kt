@@ -20,6 +20,7 @@ import androidx.compose.material.icons.filled.AudioFile
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
+import androidx.compose.material.icons.filled.SmartDisplay
 import androidx.compose.material.icons.filled.VideoCameraFront
 import androidx.compose.material.icons.filled.YoutubeSearchedFor
 import androidx.compose.material3.AlertDialog
@@ -153,7 +154,7 @@ private fun ClipCardContent(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 if (mediaType == "YouTube") {
                     Icon(
-                        imageVector = Icons.Filled.YoutubeSearchedFor,
+                        imageVector = Icons.Filled.SmartDisplay,
                         "Clip Media Type",
                         Modifier.padding(end = 8.dp)
                     )

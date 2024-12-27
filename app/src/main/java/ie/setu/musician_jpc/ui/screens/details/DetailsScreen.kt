@@ -82,7 +82,7 @@ fun DetailsScreen(
             start = 24.dp,
             end = 24.dp,
         ),
-            verticalArrangement = Arrangement.spacedBy(10.dp),
+            verticalArrangement = Arrangement.spacedBy(4.dp),
             ) {
             if (clipEmail == detailViewModel.emailAddress) {
                 DetailsScreenText(edit = true, clip = clip)
@@ -111,7 +111,7 @@ fun DetailsScreen(
                     }
 
                     if (clipEmail == detailViewModel.emailAddress) {
-                        Spacer(modifier = Modifier.height(16.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
                         youTubeText = clip.youTubeURL
                         OutlinedTextField(
                             modifier = Modifier.fillMaxWidth(),
@@ -266,7 +266,7 @@ fun DetailsScreen(
                             )
                         )
 
-                        Spacer(modifier.height(height = 16.dp))
+                        Spacer(modifier.height(height = 4.dp))
                         Button(
                             onClick = {
                                 detailViewModel.updateClip(clip)
