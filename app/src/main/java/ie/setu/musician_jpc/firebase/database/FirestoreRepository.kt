@@ -36,7 +36,11 @@ class FirestoreRepository
     override suspend fun getSearch(searchText: String): Clips {
 
         return firestore.collection(CLIP_COLLECTION)
-            .whereEqualTo(TITLE.lowercase(), searchText.lowercase())
+//            .whereEqualTo(TITLE, searchText.lowercase())
+//            .dataObjects()
+
+            .whereGreaterThanOrEqualTo(TITLE, searchText)
+            .whereLessThan(TITLE, searchText +'z')
             .dataObjects()
     }
 
